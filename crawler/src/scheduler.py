@@ -6,14 +6,15 @@ class Scheduler:
         self.split_url = urlsplit(self.url)
         self.clean_url = f"{self.split_url.scheme}://{self.split_url.netloc}{self.split_url.path}"
     
-    def allow(self, visited_urls, seet_url):
+    def allow(self, visited_urls, seet_url, same_base_url=False):
         if self.already_crawled(visited_urls):
             #print(f"Already crawled {self.clean_url}")
             return False
-        if self.wrong_base_url(seet_url):
-            #print(f"Wrong base url {self.clean_url}")
-            return False
-        
+        if same_base_url:
+            if self.wrong_base_url(seet_url):
+                #print(f"Wrong base url {self.clean_url}")
+                return False
+            
         return True
     
     # def already_stored(self, data_dir):
