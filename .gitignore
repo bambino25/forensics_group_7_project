@@ -1,0 +1,10 @@
+# Default git ignore file
+
+**/__pycache__/**
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+.docker/
+.DS_Store
+data/*

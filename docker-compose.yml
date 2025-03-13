@@ -1,0 +1,7 @@
+services:
+  crawler:
+    build: ./crawler
+    volumes:
+      - ./data:/data
+    environment:
+      - MODE=${MODE}

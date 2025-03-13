@@ -1,13 +1,15 @@
 import requests
+import ua_generator
 from urllib.parse import urlsplit
 class Downloader:
-    def __init__(self, headers=None):
+    def __init__(self):
         self.content = None
         self.url = None
         self.base_url = None
-        self.headers = headers or {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        self.headers = {
+            'User-Agent': str(ua_generator.generate())
         }
+        # {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
     def download(self, url) -> int|None:
         self.url = url

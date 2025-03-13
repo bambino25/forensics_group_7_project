@@ -48,7 +48,6 @@ if __name__ == '__main__':
         Using the UrlFrontier --> Scheduler --> Downloader --> Parser
 
         Using Breadth-First Search Strategy
-
     '''
     seed = "https://zeitwohnen.it"
     queue = [seed] # FiFo

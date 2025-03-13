@@ -1,5 +1,4 @@
 from urllib.parse import urlsplit
-from urllib.parse import urljoin
 
 class Scheduler:
     def __init__(self, url):
