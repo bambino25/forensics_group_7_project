@@ -9,13 +9,15 @@ class Downloader:
         self.headers = {
             'User-Agent': str(ua_generator.generate())
         }
+        http_proxy = "socks5h://localhost:9050"
+        self.proxy = {"http": http_proxy, "https": http_proxy}
         # {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
     def download(self, url) -> int|None:
         self.url = url
         self.base_url = "{0.scheme}://{0.netloc}".format(urlsplit(self.url))
         try:
-            response = requests.get(self.url, headers=self.headers)
+            response = requests.get(self.url, headers=self.headers, proxies=self.proxy)
             self.content = response.text
         except requests.exceptions.RequestException as e:
             print(e)
