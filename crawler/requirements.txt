@@ -1,4 +1,6 @@
-ua-generator
+fake-useragent
 beautifulsoup4
+requests[socks]
 requests
 urllib3
+pysocks

@@ -6,12 +6,12 @@ WORKDIR /app
 
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+#RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY ./src ./src
 COPY ./app.py ./
 
 # Run app.py when the container launches
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
-CMD ["python3", "app.py"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+#CMD ["python3", "app.py"]

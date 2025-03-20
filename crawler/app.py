@@ -49,6 +49,9 @@ if __name__ == '__main__':
 
         Using Breadth-First Search Strategy
     '''
+
+    seed = "http://f6wqhy6ii7metm45m4mg6yg76yytik5kxe6h7sestyvm6gnlcw3n4qad.onion"
+    seed = "http://wiki47qqn6tey4id7xeqb6l7uj6jueacxlqtk3adshox3zdohvo35vad.onion/"
     seed = "https://zeitwohnen.it"
     queue = [seed] # FiFo
     visited_urls = set()

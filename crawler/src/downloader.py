@@ -1,23 +1,27 @@
 import requests
-import ua_generator
+from fake_useragent import UserAgent
 from urllib.parse import urlsplit
+
 class Downloader:
     def __init__(self):
         self.content = None
         self.url = None
         self.base_url = None
+        ua = UserAgent()
         self.headers = {
-            'User-Agent': str(ua_generator.generate())
+            'User-Agent': ua.random
         }
         http_proxy = "socks5h://localhost:9050"
         self.proxy = {"http": http_proxy, "https": http_proxy}
-        # {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
     def download(self, url) -> int|None:
         self.url = url
         self.base_url = "{0.scheme}://{0.netloc}".format(urlsplit(self.url))
         try:
-            response = requests.get(self.url, headers=self.headers, proxies=self.proxy)
+            #print(f"Header: {self.headers}", f"Proxy:{self.proxy}")
+            #response = requests.get(self.url, headers=self.headers, proxies=self.proxy)
+            response = requests.get(self.url, headers=self.headers)
+            print(response)
             self.content = response.text
         except requests.exceptions.RequestException as e:
             print(e)
@@ -30,7 +34,7 @@ class Downloader:
         url = url.replace('http://', '').replace('https://', '')
         # Remove the query string
         #url = url.split('?')[0]
-        # Replace the slashes with underscores
+        # Replace the slashes with underscoresx 
         url = url.replace('/', '_')
     
         return url + '.html'
