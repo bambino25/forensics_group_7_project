@@ -1,0 +1,10 @@
+bs4
+pandas
+requests
+collection
+pathlib
+simplejson
+regex
+tqdm
+gliner-spacy
+spacy
