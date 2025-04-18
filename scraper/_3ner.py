@@ -11,7 +11,7 @@ df = pd.read_csv(df_path, index_col=0)
 
 # Prepare so called "memory" (because the dataset is too be processed in one go)
 df_ner_path = DEFAULT_DIR / "data_war_related_ner.csv"
-df_ner_cols = ["people", "organization", "country", "weapon", "bomb"]
+df_ner_cols = ["people", "organization", "weapon", "military_equipment", "gun_types"]
 if not Path.exists(df_ner_path) or OVERWRITE:
     df_ner = pd.DataFrame(columns=df_ner_cols, data=None)
     df_ner.to_csv(df_ner_path, index=True)
