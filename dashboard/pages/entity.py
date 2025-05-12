@@ -15,7 +15,7 @@ def main():
         page_icon="👋",
     )
 
-    @st.cache_resource()
+    #@st.cache_resource()
     def load_entity_over_time_data():
         # Read entity_over_time.csv
         file = DATA_DIR / "entity_count_over_time.csv"
@@ -51,7 +51,6 @@ def main():
         consectetur ligula. In hac habitasse platea dictumst. Donec ut felis non enim
         """
     )
-    sum_entity = st.toggle("Sum Entity", False)
 
     # For each selected entity in the sidebar the folloing linechart should get another line.
     # line chart, x-axis datetime, y-axis count
@@ -74,12 +73,27 @@ def main():
                     col_name = f"{key}"
                     df_return[col_name] = data[key].map(lambda x: sum([x.get(v, 0) for v in value]) if isinstance(x, dict) else 0)
         return df_return
-    # selection_changed(selected_entities)
+    sum_entity = st.toggle("Sum Entity", False)
     graph_data = filter_graph_data(data, selected_entities, sum_entity)
-
+    graph_data["date"] = pd.to_datetime(graph_data["date"]).dt.date
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        start_date = st.date_input("Start date", value=data["date"].min(), max_value=data["date"].max())
+    with col2:
+        end_date = st.date_input("End date", value=data["date"].max(), min_value=data["date"].min())
+    
+    
+    
+    # Filter the data based on the selected date range
+    graph_data = graph_data[(graph_data["date"] >= start_date) & (graph_data["date"] <= end_date)]
+    # Convert the date column back to string format DD-MM-YYYY
+    graph_data["date"] = graph_data["date"].astype(str)
+    
     st.line_chart(
         graph_data,
         x="date",
+
         #color=entity,
         use_container_width=True,
     )

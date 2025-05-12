@@ -1,47 +1,51 @@
 ,entity,value,count
-0,people,Trump,2031
-1,people,anons,1375
-2,people,Biden,1269
-3,people,Q,1141
-4,people,Flynn,839
-5,people,Anons,765
-6,people,Clapper,759
-7,people,POTUS,710
-8,people,people,622
-9,people,Clinton,618
-10,organization,FBI,2360
-11,organization,ISIS,1233
-12,organization,Twitter,1094
-13,organization,CIA,941
-14,organization,Islamic State,766
-15,organization,BV,714
-16,organization,8chan,696
-17,organization,Deep State,667
-18,organization,US,531
-19,organization,DOJ,499
-20,weapon,THE HAMMER,152
-21,weapon,gunfire,148
-22,weapon,snipers,143
-23,weapon,weapon,129
-24,weapon,MOAB,128
-25,weapon,thundercat,118
-26,weapon,suicide vest,112
-27,weapon,heavy weapons,100
-28,weapon,Potus,83
-29,weapon,rifle,81
-30,military_equipment,helicopters,255
-31,military_equipment,heli,111
-32,military_equipment,tanks,77
-33,military_equipment,explosives,64
-34,military_equipment,bullet proof vest,64
-35,military_equipment,aircraft,48
-36,military_equipment,military jets,38
-37,military_equipment,F-35,38
-38,military_equipment,stealth jet fighters,38
-39,military_equipment,armaments,38
-40,gun_types,bred,32
-41,gun_types,fren,32
-42,gun_types,hook,14
-43,gun_types,rodand,14
-44,gun_types,mkultra,11
-45,gun_types,garras,1
+0,people,trump,11649
+1,people,anons,9676
+2,people,biden,5856
+3,people,q,5480
+4,people,potus,5111
+5,people,flynn,3863
+6,people,anon,3795
+7,people,clapper,3698
+8,people,al-baghdadi,3165
+9,people,clinton,3107
+10,organization,fbi,11052
+11,organization,twitter,5312
+12,organization,isis,5160
+13,organization,cia,4228
+14,organization,8chan,3717
+15,organization,deep state,3669
+16,organization,bv,3207
+17,organization,islamic state,3165
+18,organization,doj,2642
+19,organization,qanon,2414
+20,weapon,moab,641
+21,weapon,snipers,639
+22,weapon,gunfire,628
+23,weapon,the hammer,620
+24,weapon,weapon,596
+25,weapon,thundercat,523
+26,weapon,suicide vest,469
+27,weapon,rifle,430
+28,weapon,heavy weapons,409
+29,weapon,heavily armed,366
+30,military_equipment,helicopters,1108
+31,military_equipment,tanks,557
+32,military_equipment,heli,471
+33,military_equipment,bullet proof vest,346
+34,military_equipment,explosives,345
+35,military_equipment,aircraft,222
+36,military_equipment,planes,168
+37,military_equipment,dumbs,168
+38,military_equipment,boats,168
+39,military_equipment,boatplanes,168
+40,gun_types,bred,168
+41,gun_types,fren,168
+42,gun_types,hook,70
+43,gun_types,rodand,70
+44,gun_types,mkultra,65
+45,gun_types,shiff,3
+46,gun_types,minibun,3
+47,gun_types,меф,2
+48,gun_types,garras,1
+49,gun_types,suppressors,1

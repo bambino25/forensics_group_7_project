@@ -77,7 +77,7 @@ def main():
 
 
     st.header("Posts")
-    @st.cache_resource()
+    # @st.cache_resource()
     def load_posts_data():
         # Read posts_by_time.csv and posts_by_length.csv
         time_df = pd.read_csv(DATA_DIR / "posts_by_time.csv", index_col=0)
@@ -90,14 +90,14 @@ def main():
         st.subheader("Posts per day")
         st.line_chart(data=posts_by_time, x="date", y="count")
     with col2:
-        st.subheader("Post Length (in words)")
+        st.subheader("Post Length (chars)")
         chart = alt.Chart(data=posts_by_length).mark_boxplot(extent='min-max').encode(
             y='length:Q'
         )
         st.altair_chart(chart, use_container_width=True)
 
     st.header("Shares")
-    @st.cache_resource()
+    # @st.cache_resource()
     def load_shares_data():
         dist_topic = pd.read_csv(DATA_DIR / "dist_topic.csv", index_col=0)
         dist_war_related = pd.read_csv(DATA_DIR / "dist_war_related.csv", index_col=0)
@@ -106,7 +106,13 @@ def main():
     topic_df, war_related_df = load_shares_data()
     
     st.subheader("Shares per topic")
-    st.bar_chart(data=topic_df, x="topic", y="count")
+    st.write(topic_df)
+    chart = alt.Chart(topic_df).mark_arc().encode(
+        theta=alt.Theta(field="count", type="quantitative"),
+        color=alt.Color(field="topic", type="nominal"),
+        tooltip=["topic", "count"]
+    )
+    st.altair_chart(chart, use_container_width=True)
 
     st.subheader("Shares posts related to war")
     war_related_df['category'] = war_related_df['war_classified'].map({0: 'Non-War Related', 1: 'War Related'})
@@ -122,7 +128,7 @@ def main():
 
     st.subheader("Found entities")
 
-    @st.cache_resource()
+    # @st.cache_resource()
     def load_entities_data():
         # Read entities.csv
         entities_df = pd.read_csv(DATA_DIR / "dist_ner.csv", index_col=0)
@@ -134,7 +140,7 @@ def main():
 
     st.header("Top 10")
 
-    @st.cache_resource()
+    # @st.cache_resource()
     def load_top10(entity):
         # Read csv file top10_ner.csv and filter for the entity 
         file = DATA_DIR / f"top10_ner.csv"

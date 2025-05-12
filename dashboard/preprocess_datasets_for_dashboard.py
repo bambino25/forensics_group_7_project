@@ -42,7 +42,7 @@ class Preprocessor:
         """Convert string representation of list to actual list."""
         for column in col:
             if column in df.columns:
-                df[column] = df[column].apply(lambda x: [item.strip() for item in x.split(",") if item.strip()] if isinstance(x, str) else list())
+                df[column] = df[column].apply(lambda x: [item.strip().lower() for item in x.split(",") if item.strip()] if isinstance(x, str) else list())
             print(f"Transformed {column} to list format.")
         return df
     def show_missing_values(self, df):
@@ -122,15 +122,18 @@ class Transformer:
         self.save(self.df[['war_classified']], name)
 
     def dist_ner(self, name="dist_ner"):
-        """ From all the not null values in the war_related_ner_df, create a DataFrame with the columns 'entity' and 'count'."""
-        # Count the number of not null values in for each col in war_related_ner_df 
-        non_null_counts = self.war_related_ner_df.notnull().sum()
-        null_counts = self.war_related_ner_df.isnull().sum()
+        """ Creates a DataFrame with the column names as rows (entity) and the number of values in each column (count). The number of values is the number of items in the list in each cell."""
+        entity = self.war_related_ner_df.columns.tolist()
+        counts = dict()
+        print(counts)
+        for column in entity:
+            counts[column] = sum(self.war_related_ner_df[column].apply(lambda x: int(len(x)) if isinstance(x, list) else int(0)))
         
+        print(counts)
         # Create a DataFrame with the results
         result_df = pd.DataFrame({
-            'entity': non_null_counts.index,
-            'count': non_null_counts.values
+            "entity": entity,
+            "count": counts.values()
         })
     
         # Save the result to a CSV file
@@ -211,7 +214,7 @@ class Transformer:
 # war_related_ner_df.info()
 # war_related_ner_df = preprocessor.str_to_list(war_related_ner_df, war_related_ner_df.columns)
 
-# transformer = Transformer(df, war_related_df, war_related_ner_df)
+#transformer = Transformer(df, war_related_df, war_related_ner_df)
 #transformer.kpi()
 #transformer.posts_by_time()
 #transformer.posts_by_length()
