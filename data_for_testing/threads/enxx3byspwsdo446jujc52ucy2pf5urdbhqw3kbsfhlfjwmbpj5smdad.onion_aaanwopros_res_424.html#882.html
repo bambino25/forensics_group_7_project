@@ -1,0 +1,1983 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' end.chan wss: endchan.net:8080; img-src 'self' data:; child-src 'self' 4chan.endchan.net *.youtube.com youtube.com *.bitchute.com bitchute.com *.nicovideo.jp *.tiktok.com *.youtube-nocookie.com;">
+  <!-- link to your CSS here -->
+  <link href="../../.static/global.css" type="text/css" rel="stylesheet">
+  <link href="../../.static/font-awesome.min.css" type="text/css" rel="stylesheet">
+  <link href="/.static/css/PenumbraLynx/watcher.css" type="text/css" rel="stylesheet">
+  <!-- don't add a title, the engine already does that for you -->
+  <!-- link to any scripts you need here -->
+  <script src="../../.static/switcher.js"></script>
+  <script src="../../.static/settings.js" defer=""></script>
+  <script src="../../.static/api.js" defer=""></script>
+  <script src="../../.static/crypt.js" defer=""></script>
+  <script src="../../.static/upload.js" defer=""></script>
+  <script src="../../.static/thread.js" defer=""></script>
+  <script src="../../.static/posting.js" defer=""></script>
+  <script src="../../.static/captcha.js" defer=""></script>
+
+  <script src="../../.static/favorites.js" defer=""></script>
+  <script src="../../.static/embed.js" defer=""></script>
+  <script src="../../.static/flagPreview.js" defer=""></script>
+  <script src="../../.static/oekaki.js" defer=""></script>
+  <script src="../../.static/showHide.js" defer=""></script>
+  <script src="../../.static/delPost.js" defer=""></script>
+  <script src="../../.static/filenameFix.js" defer=""></script>
+  <script src="../../.static/wPaint/lib/jquery.1.10.2.min.js" defer=""></script>
+  <script src="../../.static/js/jquery-timeago/jquery.timeago.js" defer=""></script>
+  <script src="../../.static/adjTimezone.js" defer=""></script>
+  <script src="../../.static/js/announcements.js" defer=""></script>
+  <script src="../../.static/megud/class.pdu.js" defer=""></script>
+  <script src="../../.static/megud/class.protocolManager.js" defer=""></script>
+  <script src="../../.static/megud/protocol.megud.js" defer=""></script>
+  <script src="../../.static/megud/megud.config.defaults.js" defer=""></script>
+  <script src="../../.static/megud/megud.lynxchan.js" defer=""></script>
+  <script src="../../.static/megud/megud.config.js" defer=""></script>
+  <script src="../../.static/megud/megud.js" defer=""></script>
+  <script src="/.static/js/PenumbraLynx/watcher.js" defer=""></script>
+  <script src="/.static/js/disableImageSpoilers.js" defer=""></script>
+
+  <!-- thread specific -->
+  <script src="../../.static/expandAll.js" defer=""></script>
+  <script src="../../.static/controlUpdate.js" defer=""></script>
+<title>/aaanwopros/ - WATCH AS FAKE Q BURNS!!</title></head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <span>[</span>
+    <a href="../../." id="navLinkHome">home</a>
+    <span>/</span>
+    <a href="../../boards.js" id="navBoardList">boards</a>
+    <span>/</span>
+    <a href="../../overboard" id="navOverboard">overboard</a>
+    <span>/</span>
+    <a href="../../account.js" id="linkAccount">account</a>
+    <span>/</span>
+    <a href="../../.static/posting.html" id="navPosting">help</a>
+    <span>]</span>
+    <span>[</span>
+    <a rel="nofollow" target="_blank" href="https://qchat.rizon.net/?channels=endchan"><i class="fa fa-quote-right" title="Chat"></i> irc</a>
+    <span>/</span>
+    <a rel="nofollow" target="_blank" href="https://twitter.com/endchanxyz"><i class="fa fa-twitter" title="Twitter"></i></a>
+    <span>]</span>
+  </nav>
+
+
+  <!-- board header -->
+  <header class="boardHeader">
+    <a href=".."><img id="bannerImage" src="/randomBanner.js?boardUri=aaanwopros"></a><br>
+    <a href=".."><p id="labelName">/aaanwopros/ - NWO Pros</p></a>
+    <p id="labelDescription">All about the NWO, cabal, Fake Q, current events.</p>
+  </header>
+
+  <div id="modeBanner">
+    <h3>Posting mode: Reply</h3>
+  </div>
+
+  <!-- new thread box -->
+  <div id="postBox">
+    <form class="form-post" action="/replyThread.js" enctype="multipart/form-data" method="post">
+    <div class="hField">
+      <input type="checkbox" name="iAmNotARobot">Check to confirm you're not a robot
+    </div>
+    <table>
+
+      <tbody><tr id="divName">
+        <th>Name</th>
+        <td>
+          <div>
+            <input type="text" id="fieldName" name="name">
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Email</th>
+        <td>
+          <input type="text" id="fieldEmail" name="email">
+        </td>
+      </tr>
+
+      <tr>
+        <th>Subject</th>
+        <td>
+          <input type="text" id="fieldSubject" name="subject" autocomplete="off">
+          <button type="submit" id="formButton">
+            New Reply
+          </button>
+          <button type="button" onclick="postReply()" id="jsButton" class="hidden">
+            New Reply
+          </button>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Comment</th>
+        <td>
+          <textarea id="fieldMessage" name="message" col="50" rows="8"></textarea>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Password</th>
+        <td>
+          <input type="password" name="password" id="fieldPostingPassword" autocomplete="off">
+        </td>
+      </tr>
+
+      <tr>
+        <th>Drawing</th>
+        <td>
+          <input type="number" placeholder="width" size="4" maxsize="4" id="oekakiWidth" value="300"> x
+          <input type="number" placeholder="height" size="4" maxsize="4" id="oekakiHeight" value="300">
+          <a href="#" onclick="Draw()">size canvas</a>
+          <div id="wPaint" style="position:relative;"></div>
+        </td>
+      </tr>
+
+      <tr id="divUpload">
+        <th>File(s)</th>
+          <td>
+            <div style="display: none;" id="dragAndDropDiv">
+              <div id="dropzone">Drag files to upload or click here to select
+                them</div>
+              <div id="selectedDiv"></div>
+            </div>
+            <input type="file" name="files" id="files" multiple="">
+          </td>
+      </tr>
+
+      <tr>
+        <td class="options" colspan="2">
+          <label class="spoilerCheckbox">
+            <input type="checkbox" name="spoiler" id="checkboxSpoiler">
+              Spoiler
+          </label>
+          
+        </td>
+      </tr>
+    </tbody></table>
+
+    
+    <input type="hidden" name="boardUri" id="boardIdentifier" value="aaanwopros">
+    <input type="hidden" name="threadId" id="threadIdentifier" value="424">
+    <p><a href="../rules.html">Board Rules</a></p>
+    <p class="small">Max file size: <span id="labelMaxFileSize">350.00 MB</span></p>
+    <p class="small">Max files: <span id="labelMaxFiles">5</span></p>
+    <p style="display: none">Max message length: <span id="labelMessageLength">4096</span></p>
+    <p><a id="linkManagement" class="small" rel="noindex" href="/boardManagement.js?boardUri=aaanwopros">Manage Board</a> |
+    <a id="linkMod" class="small" rel="noindex" href="/mod.js?boardUri=aaanwopros&amp;threadId=424">Moderate Thread</a></p>
+    <p class="topNav">
+      <!-- .. doesn't work in mod.js -->
+      <a class="returnLink" href="..">Return</a> |
+      <a class="magratheaLink" title="Future site frontend" href="https://magrathea.endchan.net/aaanwopros/thread/424.html">Magrathea</a> |
+      <a class="catalogLink" href="../catalog.html">Catalog</a> |
+      <a class="bottomLink" href="#bottom">Bottom</a>
+    </p>
+    </form>
+  </div>
+
+  <!-- controls for managing thread -->
+  
+
+  <!-- thread transfer controls -->
+  <div id="transferControls">
+    
+  </div>
+
+  <!-- ip deletion controls -->
+  <div id="ipDelete">
+    
+  </div>
+
+  <!-- message panel -->
+  <div id="panelMessage">
+    <hr>
+    <div id="divMessage">Welcome to the pros who expose the NWO!<br><br>We expose fake Q, SES, SERCO, THE CROWN CORPORATION, THE NWO CONTROL VIA THE VATICAN, THE SWISS OCTOGON SLAVE MASTERS!<br><br>Find more info here:<br><br>https://partiko.app/motherlibertynow</div>
+    <hr>
+  </div>
+
+  <p align="right">
+    <a id="expandAll" href="#">Expand All Images</a>
+  </p>
+
+  <!-- posts, much of the naming is shared with the thread list from the board page -->
+  <div id="threadList">
+    <form method="post" action="/contentActions.js" enctype="multipart/form-data">
+      <!-- this is actually where the posts are -->
+      <div id="divThreads">
+      <div data-boarduri="aaanwopros" class="opCell" id="424"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">57.84 KB</span>
+  <span class="dimensionLabel">845x450</span> <a class="originalNameLink" href="/.media/2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg.jpg" download="q-burns.jpg">q-burns.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg.jpg" data-filewidth="845" data-fileheight="450" data-filemime="image/jpeg"><img src="/.media/t_2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg" width="255" height="136"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424">
+    <span class="labelSubject">WATCH AS FAKE Q BURNS!!</span>
+    <a class="linkName noEmailName">Anonymous</a>
+    
+    
+    <span class="labelCreated">04/15/2018 (Sun) 03:48:46</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/aaanwopros/preview/424.html">[Preview]</a>
+    <a class="linkSelf" href="/aaanwopros/res/424.html#424">No.</a>
+    <a class="linkQuote" href="/aaanwopros/res/424.html#q424">424</a>
+    
+    
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage"><span class="redText">WHO REALLY CREATED Q-ANON?</span>
+<br>
+<br><strong>PART I</strong>
+<br>
+<br>Please see this link:
+<br>
+<br><a rel="nofollow" target="_blank" href="https://truthbits.blog/2018/04/13/who-is-the-fake-q/">https://truthbits.blog/2018/04/13/who-is-the-fake-q/</a>
+<br>
+<br>Here at this link above provided info on how the terms Q uses such as "The Calm Before the Storm", "The Storm" and the ideas he implements of taking down the pyramid, of MIL arrests, taking-down Soros and other ideas Q presents are actually not his own, but ours, those of CICADA, of Edward Snowden and of others as far back as 2013. 
+<br>
+<br>We posted a link (re-posted below) which outlines the posts we made on a forum way before Q entered the scene, where we stated that "A quiet storm" was rising and then we stated a month later it had turned into a storm, way before any person going by the name of Q had posted. By the time the trip-code "Q" posted, we had already posted all the plan to take down the NWO, the pyramid and put it all together into a workable actionable plan. Q simply stole this plan, claimed it to be his own then came out and accused us saying "You failed".  Thus, Q is a liar, a thief and a copy-cat. So who is the true failure if not this fake Q?
+<br>
+<br>We have posted images of our posts on a legitimate board that was taken-down by Amazon and the clowns around January 05th of this year. Since all of our hundreds of posts on restoring the Republic were wiped, no trace exists on the Internet of the hundreds of posts we made. We have html copies of all of it however. On the board where we posted this, we believe Trump came in and was observing. (We gave him our code to recognize us someday, if needed). And someone going by the name of "Q" also created a thread and said he would present to us his "latest cues." (We have html copies of all the many pages discussion with him especially in December of last year. Yet current Q claims no communications past, present future outside 8 chan and 4 chan. How can this be? Obviously an attempt to obfuscate what actually took place and hide who created the movemnt).  So I engaged a discussion with this "Q" for about two months on that same board and this ended around December 28th or so, when the board shut-down our Q discussion thread and erased it. Just before shutting it down, the board had some clown agents come in and issue to us death threats, accusing us of destroying their board. Immediately they erased the comments, closed and erased the thread. Five days later the entire board was wiped clean as a slate. Thousands upon thousands of pages gone. The Blueprint to Restore The Republic wiped clean. All ordered by Amazon, where the site was hosted, run by Jeff the Bozo, the clown agent man. Our posts were being shadow banned, were not showing up in Google searches, while all the other posts were. Our posts were under HEAVY attack, as we laid out the plan to restore the Republic in minute detail. Notice that if you look at even the first original posts of Q even none of those things "Q" claims have actually taken place. So we suspect Q is LARP from the get-go.  There was never any legitimacy to anything any version of Q has stated, since the original posts are full of disinfo and nothing any of the various versions of Q, from anonymous version to trip-code triped-out versions (Some 20-30 ips used for anon posting and then he created about 5 different trip code versions of himself on 5 different board or site locations). 
+<br>
+<br>Continued to PART II.</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell multipleUploads" data-boarduri="aaanwopros" id="425"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-425">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/15/2018 (Sun) 03:53:00</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/425.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#425">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q425">425</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/39e49fae2954bf62e2aef9f0639109ce-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">2.52 MB</span>
+  <span class="dimensionLabel">1282x9934</span> <a class="originalNameLink" href="/.media/39e49fae2954bf62e2aef9f0639109ce-imagejpeg.jpg" download="ProofOfWhoCreatedTheStorm_.jpg">ProofOfWhoCreatedTheStorm_.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/39e49fae2954bf62e2aef9f0639109ce-imagejpeg.jpg" data-filewidth="1282" data-fileheight="9934" data-filemime="image/jpeg"><img src="/.media/t_39e49fae2954bf62e2aef9f0639109ce-imagejpeg" width="33" height="255"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">2.00 MB</span>
+  <span class="dimensionLabel">1310x4058</span> <a class="originalNameLink" href="/.media/fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg.jpg" download="ProofOfWhoCreatedTheStorm2.jpg">ProofOfWhoCreatedTheStorm2.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg.jpg" data-filewidth="1310" data-fileheight="4058" data-filemime="image/jpeg"><img src="/.media/t_fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg" width="82" height="255"></a></figure></div>
+  <div class="divMessage"><strong>PART II</strong><br><br>Even the move from 8-chan to 4-chan illustrates how the entire thing is a larp. Q and 8 chan claim the Q trip code from 4 chan remained the same, as they moved him to 8-chan. This is impossible, since trip codes are computer generated and 8 chan is a different site, so anyone typing in Q and a password on a new site would generate a completely different trip code. Yet Q and 8-chan claim the same trip code was being maintained, with the same user name and same password when the move took place. This is not believalbe. Face it folks, NOTHING Q has predicted has come to pass. He is throwing a bunch of stuff at the wall, hoping something sticks. AND MOST of what he has predicted has not taken place. He is a copy-cat, a fake, a farce, a psy-op being run by The Clowns in America and their F_I counter-parts, in an attempt to run the controlled opposition effort, to be in control of the restoration of the Republic which we, Karen Hudes and other groups have created, so as to hy-jack and undermine it.  Dozens if not hundreds of thousands of people along with their Youtube shills and dozens of Q boards and channels are all either fooled or are shills, spinning and running with the "Q" narrative, all to actually undermine the restoration of the Republic, by presenting to you a copy made in China of poor quality.  And so, will you continue to fall for it or will you help us expose it and restore the Republic? The choice is yours.<br><br>We have hundreds of pages we created at the time and it could take us a year to re-create it all and re-post it all.<br><br>Here are just a few samples, attached.<br><br>Please see this info here to find-out truly who created the Q terms “Calm Before the Storm”, “The Storm” and who initiated the Q movement.<br><br>Again, Q is a combination of our ideas which he stole, CICADA, Edward Snowden writings and the ideas of others from 2013. We have posted the initial proof. Someone with white hat NSA contacts can confirm such posts were made on another board at that time, as noted in the above link. We tell the truth. Can you handle the truth or will you run with the fake Q, feeding your hopes creating a delusion of smoke and mirrors? Will you fall for the joker or trust in God above to help us restore the Republic stolen from us? The choice is yours. As for me and my house, we will serve The Lord.<br><br>Please see the next posts for a description of these images....<br><br>Continued....</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="426"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-426">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/15/2018 (Sun) 03:54:22</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/426.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#426">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q426">426</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><strong>PART III</strong><br><br>Please see the above images.<br><br>Notice how we created the term "the quiet" storm on the 12th of August of last year - 2017, and indicated that it was coming. <br><br>Note how on September 05th, we indicated the storm was intensifying.<br><br>Then we posted it was raining outside but that there was no lighting and thunder (we implied that the storm had started by nobody could see it yet).<br><br>On September 23rd, we posted that the "quiet storm" had become a "HUGE STORM".  (Post nb. 100).<br><br>On October 31, someone created the "Q" character on 4 chan and began posting based upon the terms we created, using the ideas and information we were posting on this other board.<br><br>On November 01st, we posted that the storm hit the U.S. big time. (Post nb. #101).<br><br>(We posted this the day after Q appeared on 4-chan but we were not aware of Q until later no November 11th. We found-out on November 11th. The trip-code Q was not created until later on, all using our ideas, the terms I created).<br><br>Q started posting on 4 chan after we (I) created the movement and coined the terms (The Calm Before the Storm, The Storm).<br><br>Nov. 28th we posted - "The storm is here. Massive military operations to begin to take-down the criminals, including Mueller".<br><br>What was to take only a few months is taking now a year to complete!!<br><br>STILL HAVE ANY QUESTIONS THAT WE (I) AM THE CREATOR OF THE Q MOVEMENT, TERMS, IDEAS AND THAT SOME LARPER USED THESE IDEAS WITHOUT GIVING US CREDIT?<br><br>Notice also how the move from 4 chan to 8 chan involved Q using the same trip code. Impossible. Trip codes are generated by automated systems and there is no way the Q trip code on 4 chan and 8 chan would have been exactly the same. So the larp began when Q moved from 4 chan to 8 chan.<br><br>Clarified now?<br><br>These are only a few copies of the dozens of pages we created outlining the Q plan I created. I can post more pages if you are still in doubt.<br><br>Note: We are patriots and not clowns. Anyone who denies this and attacks this is a clown and only will be exposing themselves. This what we post cannot be denied and can be verified by the NSA. We do not work for any agency.<br><br>We challenge Q to a dual. We, the legit Q challenge fake Q. Whoever can post the best, most relevant info on restoring the Republic wins. Fake Q is a banking cartel shill. We are not.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="427"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-427">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/15/2018 (Sun) 04:06:25</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/427.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#427">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q427">427</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/20c0fc902609f74bb100be0373a08351-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">109.44 KB</span>
+  <span class="dimensionLabel">568x478</span> <a class="originalNameLink" href="/.media/20c0fc902609f74bb100be0373a08351-imagejpeg.jpg" download="2c26b582dc.jpg">2c26b582dc.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/20c0fc902609f74bb100be0373a08351-imagejpeg.jpg" data-filewidth="568" data-fileheight="478" data-filemime="image/jpeg"><img src="/.media/t_20c0fc902609f74bb100be0373a08351-imagejpeg" width="255" height="215"></a></figure></div>
+  <div class="divMessage">Hmm yes this is good stuff.  You feel your method ws stolen.
+<br>
+<br>I agree Q is very "Forrest Gump" type of comms but it seems to resonate with these Youngling of the times.  I suppose those of us who did not need Q are just that much more superior.  Thanks for making us think.  <span class="spoiler">You do agree there is a swamp and it eats kids and coins gold from their body pieces alive and dead tho?</span></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="487"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-487">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 02:19:32</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/487.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#487">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q487">487</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#427">&gt;&gt;427</a><br><br>Your last question exposed your motives.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="488"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-488">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 02:20:43</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/488.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#488">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q488">488</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><strong>Day 180.4. Talking Q - MacAfee, Alperovich, Crowdstrike, and Nuclear Threat Institute</strong><br><br><span class="youtube_wrapper">https://youtube.com/watch?v=FhqiIXr3i8E [<a href="https://youtube.com/watch?v=FhqiIXr3i8E">Embed</a>]</span><br><br><br><span class="redText">COMMENTARIES</span><br><br>Diane Rosemond Hill<br>1 day ago<br><br>Q didnt talk abt NTI that i know of but we did bomb tr heir facility in Syria﻿.<br><br>Graham 95<br>1 day ago<br><br>Diane Rosemond Hill the west bombed a former facility said to be tied to them. 2005 to 2007 when it had it's funds frozen by Bush. No connection these days.﻿<br><br><br>Graham 95<br>1 day ago<br><br><u>US-led Strike On Syria: Most Of Missiles Spent On Empty Target. OPCW Report Says No Chemical Weapons There</u><br><br>So, the Pentagon says that the Barzeh facility has recently (prior to the strike) been used by the Assad government to manufacture and research chlorine and sarin.<br><br>There is a problem. The Organisation for the Prohibition of Chemical Weapons (OPCW) conducted a round of inspections in Barzeh and <strong>found no chemical weapons there.</strong><br><br><a rel="nofollow" target="_blank" href="https://southfront.org/us-led-strike-on-syria-most-of-missiles-spent-on-empty-target-opcw-report-says-no-chemical-weapons-there/">https://southfront.org/us-led-strike-on-syria-most-of-missiles-spent-on-empty-target-opcw-report-says-no-chemical-weapons-there/</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="489"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-489">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 02:21:43</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/489.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#489">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q489">489</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#487">&gt;&gt;487</a>
+<br>
+<br>Yes my motive is to stop the slave trade of kids.  What's yours?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="491"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-491">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 02:23:27</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/491.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#491">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q491">491</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#488">&gt;&gt;488</a><br><br>More commentaries:<br><br>craxd1<br><br>1 day ago (edited)<br><br>George: New York City is the center of most of the "oligarch" corruption involved. You would be well within known facts to finger that city. <br><br>It has been that way since this country was founded, but it became much worse after 1900.<br><br>Let's just say that <strong>the mega-wealthy there have a really close relationship to the British Crown and the aristocrats</strong>, along with those high up in their military/intel. I've seen membership lists to certain societies that would make your jaw drop, and their meetings are very telling. It's all about money and power.﻿<br><br>Brad<br>1 day ago (edited)<br><br>They do not care about peace, equality and sustainability. These people are sick and they are making the world a sick place.﻿<br><br><br>craxd1<br><br>13 hours ago<br>Brad: People really don't understand how corrupt the district is, (not all, but many), and it was put where it is, over moving the seat of power away from New York; especially Wall Street. The founders knew about the banks, the corruption, the conspiracy, and bribery back then. Also, at the time, New York had certain Irish societies that controlled their politics and still do today, along with a few Anglo-American elite private societies there, ran similar to the British gentlemen's clubs. The Irish societies run the city, and the Anglo-American the state and nation. They have no scruples nor morals like their societies claim to have. It is all about the wealthy making more money, obtaining more power, and pushing their Anglo-American agenda. The actions of Boss Tweed and Tammany Hall never died, it became much worse. John Jr. exposed this in his magazine, George, along with starting his run for the Senate, and not long after that, he was dead. Witnesses stated that his plane blew up in midair.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="492"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-492">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 02:26:38</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/492.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#492">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q492">492</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#488">&gt;&gt;488</a><br><br><strong>V for Vendetta: The Revolutionary Speech (HD)</strong><br><br><span class="youtube_wrapper">https://youtube.com/watch?v=KKvvOFIHs4k [<a href="https://youtube.com/watch?v=KKvvOFIHs4k">Embed</a>]</span><br><br>MrSovetski<br>Published on Nov 15, 2011<br><br>The famous speech by V to the city of London, extracted from the film "V for Vendetta."<br><br>Brad<br>1 day ago<br><br>Now that Hannity is exposed, how long before Alex Jones, Roger Stone, Jason Goodman, etc? This psyop is exposed and American people deserve compensation and justice!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="496"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-496">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 13:47:16</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/496.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#496">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q496">496</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">OK so with Q being exposed. Does that mean that the public won't be restored and your original concept won't be implemented?<br><br>Just wondering when we get our county back.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="497"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-497">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/18/2018 (Wed) 22:21:22</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/497.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#497">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q497">497</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#496">&gt;&gt;496</a><br><br>Do you mean to say it may mean the Republic will not be restored?<br><br>Clearly, with Trump in office and not even willing to fire guilty people like Sessions, Rosenstein and Wray, all SES members who are protecting each other, how will he help restore the Republic? Truly Trump is not another banking cartel agent and Q is there only to lie and prop-up more lies and false information. If you want the Republic restored, WE are going to need to do it. We can´t wait around for some fake Q saying "Trust the Plan" while Trump bombs innocent people and we see there is no plan. There is no free lunch. WE need to do the hard work to restore the Republic and not trust in these masonic Vatican banking cartel shills such as Trump nor any fake Q lies.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="502"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-502">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/19/2018 (Thu) 12:30:15</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/502.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#502">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q502">502</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><span class="greenText">&gt;https:// truthbits.blog/2018/04/13/who-is-the-fake-q/</span><br><br><span class="greenText">&gt;"From October to December, we began publishing the ideas of how to take-down the NWO on another board and we had Trump following us there and discussing the ideas with us, anonymously. He liked our ideas."</span><br><br><span class="greenText">&gt;"Enter Q around October of last year. By this time, we were already sharing our ideas with Trump on how to initiate our plan, the stages and how it would be accomplished. Trump liked our ideas and adopted them."</span><br><br>So in this article it appears Trump is on /our/ side.<br><br><a class="quoteLink" href="/aaanwopros/res/424.html#425">&gt;&gt;425</a><br><span class="greenText">&gt;Even the move from 8-chan to 4-chan illustrates how the entire thing is a larp.</span><br><br>The move was from 4-chan to 8-chan so that's inaccurate.<br><br><a class="quoteLink" href="/aaanwopros/res/424.html#426">&gt;&gt;426</a><br><span class="greenText">&gt;These are only a few copies of the dozens of pages we created outlining the Q plan I created. I can post more pages if you are still in doubt.</span><br><br><br>Please do because so far this isn't much to believe.<br><br><a class="quoteLink" href="/aaanwopros/res/424.html#497">&gt;&gt;497</a><br><br>So Trump is not onboard....so its up to us. How do?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="503"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-503">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/19/2018 (Thu) 17:18:02</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/503.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#503">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q503">503</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><u>Who is the Fake Q? – AIM Truth Bits</u><br><br><a rel="nofollow" target="_blank" href="https://truthbits.blog/2018/04/13/who-is-the-fake-q/">https://truthbits.blog/2018/04/13/who-is-the-fake-q/</a><br><br>Woe unto you who say “peace, peace” and reject the Word of God and The Son of God!<br><br>There will be no peace on the earth while you reject The King and The Son of Man.<br><br>You fight, accuse, destroy the earth and attack The Children of God and claim you are the light and you are knowledge.  You dwell in iniquity and you reject The Prince of Peace.<br><br>God has ordained: There will no peace on the earth while you reject the Prince of Peace.<br><br>Your ambitions and plans shall come to naught. Your goals of a united world under new enlightment, guided by lying Spirits and esoteric knowledge shall come to nothing. It will be buried in the heap of nuclear destruction. Repent oh earth for God is going to bring destruction upon you for you have sought peace by your own earthly carnal means and have rejected the only Prince of Light and Truth that God hath offered. <br><br>The land lay waste while fools claim “Peace”.<br><br>The earth is barren and laid to waste and the creation cries-out for the Sons of God will resurrect in unity and the dry bones shall again produce flesh. The army of God shall raise from the ashes and The Beast and his armies shall perish in the plains of Armageddon. The Lord God Almighty has decreed.<br><br>The King cometh as a roaring Lion and the plains of Meribah shall be laid to waste. Zebulun and Naphtali, the people living in darkness have seen a Great Light, for the true light of the Son of Man hath risen upon the land and the Lord shall smite His enemies. Woe unto you who call darkness light and light darkness!!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="504"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-504">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/19/2018 (Thu) 17:18:43</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/504.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#504">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q504">504</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#502">&gt;&gt;502</a><br><br>That was a typing error. We were referring to the move from 4-chan to 8-chan.<br><br>We do not know what is going on with Trump but it appears:<br><br>1. He is getting bad advice.<br><br>2. He is being deceived.<br><br>3. Trump may be under attack and they are attempting to black-mail him and force him by coersion and various means to do what he did not want to do.<br><br>Trump is on our side but he is under tremendous pressure from his enemies.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="511"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-511">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/29/2018 (Sun) 00:44:01</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/511.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#511">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q511">511</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#504">&gt;&gt;504</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#504">&gt;&gt;504</a><br><span class="greenText">&gt;Trump is on our side but he is under tremendous pressure from his enemies.</span><br><br>Deep State was going to wave the white flag straight away &lt;surrender</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="512"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-512">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/01/2018 (Tue) 16:09:35</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/512.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#512">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q512">512</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/536.html#536">&gt;&gt;536</a><br><a class="quoteLink" href="/aaanwopros/res/537.html#537">&gt;&gt;537</a><br><span class="greenText">&gt; the evidence is there in what I have posted</span><br>No, it's not actually. All you've posted proof of is that someone on that forum was using the word "storm." You provided no proof that the plans laid out by Q were discussed there. Yes, Q is almost certainly a LARP. But, your particular alternative explanation is entirely lacking in sufficient evidence to be taken seriously. <br><span class="greenText">&gt; The html files have a lot of trash replies also and those need to be removed as those garbage replies are very insulting and must not be shared with anyone.</span><br>Those are bullshit reasons. "Sorry, it's messy and I don't want to offend anyone."</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="513"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-513">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/01/2018 (Tue) 17:24:34</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/513.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#513">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q513">513</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">LMFAO!!! So....you decided after 6 months to let everyone know you made this storm up? And how do you explain the Q predictions that are accurate? Oh wait...you went from larp to jooh Q, right? Israel Q now, right? <br><br>If I created this idea 4 years ago, it wouldn't take me almost 7 months to say something. God, you're dumb.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="516"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-516">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/19/2018 (Sat) 22:58:07</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/516.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#516">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q516">516</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#512">&gt;&gt;512</a><br>You are wrong. We posted that we created "The Quiet Storm" and later referred to it as the storm.<br><br>The reason that the evidence appears missing is because our threads were wiped from the internet last January and it is a huge task to re-create it all and prove to you we are the creators of the Q concepts and ideas. <br><br>See this board for more info and updates on all of this:<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/catalog.html">https://8ch.net/bannedfromqresearch/catalog.html</a><br><br><a class="quoteLink" href="/aaanwopros/res/424.html#513">&gt;&gt;513</a><br><br>We did not let everyone know after six months. We let everyone know a few months back. You just missed it. And it took us time also to realize what is going on and to see how everything we created was hijacked. It was not obvious at the start until we began to see over time what Q has been writing and proposing. Then we put the pieces together and got the full picture of how Q hijacked everything we, CICADA 3301 and others have created, including Edward Snowden.<br><br>Q is using CIA and Mossad Intel. This explains the accuracy predictions, which is based upon legit Intel. But the agenda does not have us patriots in mind  - it is to fool all, get them to trust bad actors, SES criminals and to get all to get conditioned into accepting war with Syria and Iran.<br><br>And the idea was not created 4 years ago. We created the ideas in 2016 and late 2017 and just before the Q larp started we were putting out the best info.<br><br>Please get the facts straight.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="517"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-517">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/21/2018 (Mon) 19:42:43</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/517.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#517">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q517">517</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Forget Q.  It only takes away from Q stole your idea.  If what you are saying is really true, continue what you have been doing instead of defending yourself.  Created your own QResearch board.  Truth will shine and will win.  Create your own Q and forget "Fake Q".  Your work will prove Q idea was stolen.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="518"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-518">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/24/2018 (Thu) 15:36:31</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/518.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#518">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q518">518</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#517">&gt;&gt;517</a><br><br>True, that is what we are doing. <br><br>Study the entire contents of this board and you will find-out who we are.<br><br>When finished, go to this board:<br><br><span class="redText">BANNED FROM Q RESEARCH EXPOSES FAKE Q AND THE NEW WORLD ORDER</span><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/catalog.html">https://8ch.net/bannedfromqresearch/catalog.html</a><br><br>Welcome to the journey!!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="519"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-519">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/24/2018 (Thu) 15:54:44</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/519.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#519">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q519">519</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">If they really find Trump to be a threat, they will simply use the Fed to crash the entire economy on Trump's watch... and then they'll sit back and watch the Republican party be removed with pitchforks by the gullible idiotic masses who don't know anything about economics, or capitalism for that matter, what-so-ever.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="520"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-520">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/24/2018 (Thu) 22:55:07</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/520.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#520">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q520">520</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#519">&gt;&gt;519</a><br><br>Trump is not a threat. He is part of the swamp.<br><br>Please see this post here:<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/1093.html#q1540">https://8ch.net/bannedfromqresearch/res/1093.html#q1540</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="521"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-521">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/03/2018 (Sun) 19:54:07</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/521.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#521">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q521">521</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><span class="redText">Q LARP FULLY EXPOSED</span><br><br><u>The full story of the Q - anon hijacking:</u><br><br><strong>For UNIROCK, LIFT THE VEIL, CORSI, ALEX JONES, 0-HOUR, ANTI-SCHOOL, AIM, TITUS FROST, FULCRUM NEWS, DEFANGO, CICADA 3301, THE WHITE RABBIT, QYNN MICHAELS, JASON GOODMAN, GEORGE WEBB and whomever it may concern:</strong><br><br><span class="redText">The Story of Q-anon. FULL VERSION</span><br><br>--&gt;<br><br><br><a class="quoteLink" href="/bannedfromqresearch/res/2218.html#2218">&gt;&gt;&gt;/bannedfromqresearch/2218</a><br><br><a class="quoteLink" href="/bannedfromqresearch/res/2219.html#2219">&gt;&gt;&gt;/bannedfromqresearch/2219</a><br><br><a class="quoteLink" href="/bannedfromqresearch/res/2220.html#2220">&gt;&gt;&gt;/bannedfromqresearch/2220</a><br><br><a class="quoteLink" href="/bannedfromqresearch/res/2221.html#2221">&gt;&gt;&gt;/bannedfromqresearch/2221</a><br><br><strong>Now you got the full scoop on what took place.</strong><br><br>(Thank you Lift the veil, UNI and others).</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="522"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-522">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/03/2018 (Sun) 19:56:00</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/522.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#522">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q522">522</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><span class="redText">Q LARP FULLY EXPOSED</span><br><br><u>The full story of the Q - anon hijacking:</u><br><br><strong>For UNIROCK, LIFT THE VEIL, CORSI, ALEX JONES, 0-HOUR, ANTI-SCHOOL, AIM, TITUS FROST, FULCRUM NEWS, DEFANGO, CICADA 3301, THE WHITE RABBIT, QYNN MICHAELS, JASON GOODMAN, GEORGE WEBB and whomever it may concern:</strong><br><br><span class="redText">The Story of Q-anon. FULL VERSION</span><br><br>--&gt;<br><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/1093.html#2218">https://8ch.net/bannedfromqresearch/res/1093.html#2218</a><br><br><strong>Now you got the full scoop on what took place.</strong><br><br>Thank you LIFT THE VEIL, UNIROCK and others!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="523"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-523">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/03/2018 (Sun) 19:57:43</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/523.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#523">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q523">523</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#521">&gt;&gt;521</a><br><br>Please see this post for the correct link -<br><br><a class="quoteLink" href="/aaanwopros/res/424.html#522">&gt;&gt;522</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="527"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-527">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/13/2018 (Wed) 01:36:00</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/527.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#527">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q527">527</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><strong>TWO LINKS WHICH EXPLAIN HOW WIKILEAKS CONFIRMS Q IS A PIED PIPER INTEL OP TO DROWN PATRIOTS:</strong><br><br><a rel="nofollow" target="_blank" href="https://patriots4truth.org/2018/06/01/julian-assange-political-prisoner-of-the-queen-elizabeth/comment-page-1/#comment-1092">https://patriots4truth.org/2018/06/01/julian-assange-political-prisoner-of-the-queen-elizabeth/comment-page-1/#comment-1092</a><br><br><br><a rel="nofollow" target="_blank" href="https://patriots4truth.org/2018/06/01/julian-assange-political-prisoner-of-the-queen-elizabeth/comment-page-1/#comment-1094">https://patriots4truth.org/2018/06/01/julian-assange-political-prisoner-of-the-queen-elizabeth/comment-page-1/#comment-1094</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="528"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-528">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/13/2018 (Wed) 02:13:19</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/528.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#528">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q528">528</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#527">&gt;&gt;527</a><br>More than likely he is just a schizotypal right winger who reads too much fake news like all you dog whistlers on here.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="530"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-530">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/15/2018 (Fri) 00:17:01</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/530.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#530">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q530">530</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#522">&gt;&gt;522</a><br><br><span class="redText">For UNIROCK, LIFT THE VEIL....</span></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="531"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-531">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/17/2018 (Sun) 17:02:45</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/531.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#531">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q531">531</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#489">&gt;&gt;489</a><br><br>Oh, that is a good motive. My motive is to help free the planet.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="532"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-532">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/17/2018 (Sun) 17:03:38</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/532.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#532">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q532">532</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">All the images on this board disappeared. Wonder why?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="539"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-539">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/17/2018 (Sun) 19:53:15</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/539.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#539">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q539">539</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">57.84 KB</span>
+  <span class="dimensionLabel">845x450</span> <a class="originalNameLink" href="/.media/2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg.jpg" download="q-burns.jpg">q-burns.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg.jpg" data-filewidth="845" data-fileheight="450" data-filemime="image/jpeg"><img src="/.media/t_2dc120d2f13fa6248201b0dee3e36d1c-imagejpeg" width="255" height="136"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#424">&gt;&gt;424</a><br><br>Related image.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="583"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-583">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/18/2018 (Mon) 00:14:44</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/583.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#583">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q583">583</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><strong>We at banned from Q research created the original Q ideas which these people called "Q" stole from us!!</strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/catalog.html#">https://8ch.net/bannedfromqresearch/catalog.html#</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="593"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-593">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/18/2018 (Mon) 00:45:05</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/593.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#593">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q593">593</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Please see these links conclave:<br><br>▶ <strong>Q-ANON, THE PIED PIPER EXPOSED!! </strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/2590.html">https://8ch.net/bannedfromqresearch/res/2590.html</a><br><br>▶ <strong>FAKE Q ANON EXPOSED - Five I Intel operation revealed </strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/1933.html">https://8ch.net/bannedfromqresearch/res/1933.html</a><br><br>▶ <strong>The Seven layers of Deception in fake Q, SERCO, SES, Syria, British Crown and Khazarian NWO mafia</strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/951.html">https://8ch.net/bannedfromqresearch/res/951.html</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="598"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-598">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/18/2018 (Mon) 00:51:32</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/598.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#598">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q598">598</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/034ed73073a2103a99cd1a79ff6dceb7-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">23.83 KB</span>
+  <span class="dimensionLabel">474x266</span> <a class="originalNameLink" href="/.media/034ed73073a2103a99cd1a79ff6dceb7-imagejpeg.jpg" download="fca73aba37b16263428e62f0dd8d2304a54953b09e7f7d29ff386031e7db2895.jpg">fca73aba37b16263428e62f0dd8d2304a54953b09e7f7d29ff386031e7db2895.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/034ed73073a2103a99cd1a79ff6dceb7-imagejpeg.jpg" data-filewidth="474" data-fileheight="266" data-filemime="image/jpeg"><img src="/.media/t_034ed73073a2103a99cd1a79ff6dceb7-imagejpeg" width="255" height="143"></a></figure></div>
+  <div class="divMessage">▶ <strong>THE TAKE-DOWN OF FAKE Q - A SAGA BIGGER THEN STAR WARS!!</strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/1093.html">https://8ch.net/bannedfromqresearch/res/1093.html</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell multipleUploads" data-boarduri="aaanwopros" id="607"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-607">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 18:44:01</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/607.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#607">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q607">607</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/39e49fae2954bf62e2aef9f0639109ce-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">2.52 MB</span>
+  <span class="dimensionLabel">1282x9934</span> <a class="originalNameLink" href="/.media/39e49fae2954bf62e2aef9f0639109ce-imagejpeg.jpg" download="ProofOfWhoCreatedTheStorm_.jpg">ProofOfWhoCreatedTheStorm_.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/39e49fae2954bf62e2aef9f0639109ce-imagejpeg.jpg" data-filewidth="1282" data-fileheight="9934" data-filemime="image/jpeg"><img src="/.media/t_39e49fae2954bf62e2aef9f0639109ce-imagejpeg" width="33" height="255"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">2.00 MB</span>
+  <span class="dimensionLabel">1310x4058</span> <a class="originalNameLink" href="/.media/fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg.jpg" download="ProofOfWhoCreatedTheStorm2.jpg">ProofOfWhoCreatedTheStorm2.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg.jpg" data-filewidth="1310" data-fileheight="4058" data-filemime="image/jpeg"><img src="/.media/t_fa5bb83ef136ad239ff12a3cf9891e91-imagejpeg" width="82" height="255"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#424">&gt;&gt;424</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#425">&gt;&gt;425</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#426">&gt;&gt;426</a><br><br><br>Please see the attached images and the links above as well as this link here, to see how I created the original Q terms "The Quiet Storm", "The Storm" and many ideas which Q tards stole from me:<br><br>These posts explain in more details who Q is, how it formed, how it got hi-jacked and how I was the original created of the terms "The Quiet Storm", "The Storm" and many ideas which were later posted by the Q group. They stole the terms and many ideas from me and from Trump - Stephen Miller and possibly from Thomas Drake and others as well.<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/606.html#3351">https://8ch.net/bannedfromqresearch/res/606.html#3351</a><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/606.html#3352">https://8ch.net/bannedfromqresearch/res/606.html#3352</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="608"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-608">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 18:49:18</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/608.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#608">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q608">608</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#425">&gt;&gt;425</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#607">&gt;&gt;607</a><br><br>See this post also, where I explain this in more detail:<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/606.html#3366">https://8ch.net/bannedfromqresearch/res/606.html#3366</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="609"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-609">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 18:50:59</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/609.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#609">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q609">609</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#489">&gt;&gt;489</a><br><br>As I noted in the post I just made, to help set the planet free!!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="610"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-610">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 18:53:02</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/610.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#610">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q610">610</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#496">&gt;&gt;496</a><br><br>Hopefully the orinal concept and ideas I created and which Trump adopted will be implemented. However it is possible Trump is being black-mailed and impeded in implementing them.... So pray.<br><br>See the post I just made and referred to links -<br><br><a class="quoteLink" href="/aaanwopros/res/424.html#607">&gt;&gt;607</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#608">&gt;&gt;608</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#609">&gt;&gt;609</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="611"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-611">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 18:53:37</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/611.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#611">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q611">611</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#610">&gt;&gt;610</a><br><br>Actually see the posts I just made. See links above.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="612"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-612">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 18:56:23</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/612.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#612">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q612">612</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#511">&gt;&gt;511</a><br><br>They do not surrender so easy and in fact seem to have black-mailed and compromised Trump...reason why it is difficult now to implement my plan. The fake Q plan, posted on Q-Research bord is fake. My plan is the original legit plan. I am the source of fake Q currently posting - pamphlet anon, Brain Storm, Jason Coleman phone app guy and all the current retards posting as "Q".</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="613"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-613">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 19:02:55</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/613.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#613">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q613">613</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#512">&gt;&gt;512</a><br><br>And has fake Q posted any proof?<br><br>See this post here and hopefully you will understand how I created legit Q:<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/3303.html#q3310">https://8ch.net/bannedfromqresearch/res/3303.html#q3310</a><br><br>See the full thread:<br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/3303.html">https://8ch.net/bannedfromqresearch/res/3303.html</a><br><br>And all the threads and links referred to here:<br><br><a class="quoteLink" href="/aaanwopros/res/424.html#607">&gt;&gt;607</a><br><br>See the above posts I have just made also.<br><br><strong>Please do not hold me to a higher standard then is being demanded of fake Q on Q-Research board.</strong><br><br>It will take months, perhaps a year, to prove I am the original source of Q. Patience is a virtue. Criticism based upon being lazy or some other excuse is not justified.<br><br>Thank you.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="614"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-614">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 19:05:52</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/614.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#614">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q614">614</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#513">&gt;&gt;513</a><br><br>Which fake Q predictions are accurate? So far, more misses then hits.<br><br>When Thomas Drake and especially Stephen Miller were involved, the predictions were much better. But nobody can be 100% always right.<br><br>I never started this to make predictions. I started the Q ideas to restore the Republic. All that has developed since then is a larp, with the exception of anything Stephen Miller has posted (or Thomas Drake).<br><br>Thank you.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="615"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-615">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/19/2018 (Tue) 19:09:00</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/615.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#615">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q615">615</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#517">&gt;&gt;517</a><br><br>That is what I am trying to do now, since more and more it is becoming clear that all versions of Q are larps. Only the original anons or Stephen - Thomas posting are good. But even then much of that is wrong also and never took place. Forget anyone trying to make predictions and let´s focus on Restoring the broken Republic which is no more and has been taken-over by The Black Nobility Banking Cartel!!<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/2606.html">https://8ch.net/bannedfromqresearch/res/2606.html</a><br><br>See all the posts on this board for more details -<br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/catalog.html">https://8ch.net/bannedfromqresearch/catalog.html</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell multipleUploads" data-boarduri="aaanwopros" id="735"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-735">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">06/26/2018 (Tue) 16:32:27</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/735.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#735">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q735">735</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/4c10266097230f2a0771ffb565af3540-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">761.91 KB</span>
+  <span class="dimensionLabel">2450x3733</span> <a class="originalNameLink" href="/.media/4c10266097230f2a0771ffb565af3540-imagejpeg.jpg" download="LegitSourceOfQAnon_1.jpg">LegitSourceOfQAnon_1.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/4c10266097230f2a0771ffb565af3540-imagejpeg.jpg" data-filewidth="2450" data-fileheight="3733" data-filemime="image/jpeg"><img src="/.media/t_4c10266097230f2a0771ffb565af3540-imagejpeg" width="167" height="255"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/7f12060f61b107f6884538b627f69d4f-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">545.28 KB</span>
+  <span class="dimensionLabel">1850x1166</span> <a class="originalNameLink" href="/.media/7f12060f61b107f6884538b627f69d4f-imagejpeg.jpg" download="TheDestroyerOfTheNWO_1.jpg">TheDestroyerOfTheNWO_1.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/7f12060f61b107f6884538b627f69d4f-imagejpeg.jpg" data-filewidth="1850" data-fileheight="1166" data-filemime="image/jpeg"><img src="/.media/t_7f12060f61b107f6884538b627f69d4f-imagejpeg" width="255" height="161"></a></figure></div>
+  <div class="divMessage"><span class="redText">The Empire Arrives - Star Wars Episode VI - The Return of Legit Q.</span><br><br>▶ <strong>The Source of Q - The Story &amp; Background.</strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/3732.html">https://8ch.net/bannedfromqresearch/res/3732.html</a><br><br><a class="quoteLink" href="/aaanwopros/res/717.html#717">&gt;&gt;717</a><br><br><u>Q is Whoever You Are.</u><br><br><span class="youtube_wrapper">https://youtube.com/watch?v=c4K5Ip1UDus [<a href="https://youtube.com/watch?v=c4K5Ip1UDus">Embed</a>]</span><br><br><em>Q is Whoever I AM.</em><br><br><u>I am The Destroyer of The NWO.</u></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell multipleUploads" data-boarduri="aaanwopros" id="756"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-756">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">07/06/2018 (Fri) 10:08:33</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/756.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#756">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q756">756</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/77723b609778f1d86021f93732b59786-imagegif.gif">Open File</a>(<span class="sizeLabel">2.72 MB</span>
+  <span class="dimensionLabel">500x500</span> <a class="originalNameLink" href="/.media/77723b609778f1d86021f93732b59786-imagegif.gif" download="e078bdd5-2619-4315-8cf6-1248c92da787.gif">e078bdd5-2619-4315-8cf6-1248c92da787.gif</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/77723b609778f1d86021f93732b59786-imagegif.gif" data-filewidth="500" data-fileheight="500" data-filemime="image/gif"><img src="/.media/t_77723b609778f1d86021f93732b59786-imagegif" width="255" height="255"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/b45ef37bcae00fa105318b274c578f97-imagegif.gif">Open File</a>(<span class="sizeLabel">1.59 MB</span>
+  <span class="dimensionLabel">500x343</span> <a class="originalNameLink" href="/.media/b45ef37bcae00fa105318b274c578f97-imagegif.gif" download="5cd7d9c9-d6b9-4af8-955e-a8cdfe2e2b11.gif">5cd7d9c9-d6b9-4af8-955e-a8cdfe2e2b11.gif</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/b45ef37bcae00fa105318b274c578f97-imagegif.gif" data-filewidth="500" data-fileheight="343" data-filemime="image/gif"><img src="/.media/t_b45ef37bcae00fa105318b274c578f97-imagegif" width="255" height="175"></a></figure></div>
+  <div class="divMessage"><span class="orangeText">&lt;^&gt;</span><br><span class="greenText">&gt;aaaannnnd this one too.</span><br><span class="redText">chukl</span><br><span class="greenText">&gt;awl mæıи.</span></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="758"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-758">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">08/29/2018 (Wed) 16:09:06</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/758.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#758">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q758">758</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/d5784f243774bfb136c99ca97caf4df8-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">1.32 MB</span>
+  <span class="dimensionLabel">1799x1760</span> <a class="originalNameLink" href="/.media/d5784f243774bfb136c99ca97caf4df8-imagejpeg.jpg" download="01snow.jpg">01snow.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/d5784f243774bfb136c99ca97caf4df8-imagejpeg.jpg" data-filewidth="1799" data-fileheight="1760" data-filemime="image/jpeg"><img src="/.media/t_d5784f243774bfb136c99ca97caf4df8-imagejpeg" width="255" height="249"></a></figure></div>
+  <div class="divMessage">What they did to you, to us, they are doing it to Unitiy4j, Youtube influencers are not to be trusted, we need to get them exposed, asap.<br><br>I like what i read here, the overly religious tone is gone, as well as the over use of trigger words, you should contact #GDL, get true followers not mindless zombies.<br><br>In this "game" of identity theft, smearing, doxing, etc, you can't remain in the shadows, and by this i don't mean to reveal personal data or even you're real name. I support you <br><span class="youtube_wrapper">https://youtube.com/watch?v=K1dC4LLDmIE [<a href="https://youtube.com/watch?v=K1dC4LLDmIE">Embed</a>]</span></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="764"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-764">
+  <span class="labelSubject">Thank you for the support. Who is GDL?</span>
+  <a class="linkName" href="mailto:Q-SOURCE-X">Anonymous</a>
+  
+  
+  <span class="labelCreated">10/14/2018 (Sun) 15:26:59</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/764.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#764">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q764">764</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/39c903b402a82851a741d43739df8883-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">80.17 KB</span>
+  <span class="dimensionLabel">650x364</span> <a class="originalNameLink" href="/.media/39c903b402a82851a741d43739df8883-imagejpeg.jpg" download="ConnedByFakeQAnon_.jpg">ConnedByFakeQAnon_.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/39c903b402a82851a741d43739df8883-imagejpeg.jpg" data-filewidth="650" data-fileheight="364" data-filemime="image/jpeg"><img src="/.media/t_39c903b402a82851a741d43739df8883-imagejpeg" width="255" height="143"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#758">&gt;&gt;758</a><br><br>Who is <em>GDL</em>?<br><br><span class="redText">Please see my board here with all of the evidences:</span><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/qsourcex/catalog.html">https://8ch.net/qsourcex/catalog.html</a><br><br>This new board explains The History of fake Q &amp; Legit Q. It also has posted my plan to unite the two Koreas. You will find also links to the legit plan to save the world, the steps needed to restore the Republic, the true Blue-print for the New Republic, information on our new political party NESARA to free America, Our Operation Cross-Fire Hurricane Two, lists of the mega failures of fake Q, the Fake Q Epistemic Cult Bubble and Pied Piper, the mega Q scams, the fake Jordan Sather Photoshop images, the fake Q list of Congress people resigning, info on how Trump is being black-mailed, how Trump is also blocking us from minting our new currencies free of the banking cartel <strong>WHICH OWES US TWO QUADRILLION DOLLARS</strong> and <strong>HOW OUR NATIONAL DEBT CAN BE PAID-OFF OVER-NIGHT WITH A STROKE OF A PEN.</strong><br><br><strong>More info on these boards here:</strong><br><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch2/catalog.html">https://8ch.net/bannedfromqresearch2/catalog.html</a><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/catalog.html">https://8ch.net/bannedfromqresearch/catalog.html</a><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/scamsexposed/catalog.html">https://8ch.net/scamsexposed/catalog.html</a><br><br><span class="redText">The Biggest Scam of all exposed</span><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/scamsexposed/res/1.html">https://8ch.net/scamsexposed/res/1.html</a><br><br><span class="redText">NEW WORLD ORDER PROS EXPOSES THE GRAND PYRAMID NWO</span><br><br><a rel="nofollow" target="_blank" href="https://endchan.net/aaanwopros/catalog.html">https://endchan.net/aaanwopros/catalog.html</a><br><br><strong>▶ #QSentMe, Moderator Free Flow &amp; Fake Q Exposed!</strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/bannedfromqresearch/res/8414.html">https://8ch.net/bannedfromqresearch/res/8414.html</a><br><br><strong>Q IS FAKE, A LARP.</strong><br><br><span class="redText">PATRIOT SOAP BOX LIARS.</span><br><br><strong>Full banned from Q Research Board with all the missing links erased by CM found here:</strong><br><br><a rel="nofollow" target="_blank" href="https://web.archive.org/web/20180820085421/https://8ch.net/bannedfromqresearch/catalog.html">https://web.archive.org/web/20180820085421/https://8ch.net/bannedfromqresearch/catalog.html</a><br><br><strong>Please visit the link and get all the original full threads.</strong></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="765"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-765">
+  <span class="labelSubject">Thank you for the support Lestat of CICADA 3301!!</span>
+  <a class="linkName" href="mailto:Q-SOURCE-X">Anonymous</a>
+  
+  
+  <span class="labelCreated">10/14/2018 (Sun) 15:35:49</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/765.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#765">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q765">765</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#758">&gt;&gt;758</a><br><br>Just watched your video Lestat. The Seven Sevens crack the 4-chan - 8-chan fake Q anon. This is the message I get at first glance. Thank you for the support!<br><br>I look forward to hearing from you again!<br><br><em>Q-SOURCE-X</em><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/qsourcex/catalog.html">https://8ch.net/qsourcex/catalog.html</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="766"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-766">
+  <span class="labelSubject">Q-SOURCE-X Responds to Lestat From CICADA 3301</span>
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">10/14/2018 (Sun) 16:09:50</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/766.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#766">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q766">766</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/f81b7455b7e06fefe42a0ed9bd7963c2-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">36.23 KB</span>
+  <span class="dimensionLabel">515x282</span> <a class="originalNameLink" href="/.media/f81b7455b7e06fefe42a0ed9bd7963c2-imagejpeg.jpg" download="QSourceXNew_2.jpg">QSourceXNew_2.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/f81b7455b7e06fefe42a0ed9bd7963c2-imagejpeg.jpg" data-filewidth="515" data-fileheight="282" data-filemime="image/jpeg"><img src="/.media/t_f81b7455b7e06fefe42a0ed9bd7963c2-imagejpeg" width="255" height="140"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#758">&gt;&gt;758</a><br><br>You are correct Lestat. <strong>This IS a case of IDENTITY THEFT and monetary theft also</strong>. This because a poster by the name of <em>Always Be Questioning" offered me a nice reward in block-chain currency for the information I posted on Project Pelican on the fake 8-chan Qresearch board. Pamphlet anon and Raddix as moderators of the fake Qresearch and fake Q board deleted the info I posted on Project Pelican, so this user </em>Always be Questioning<em> contacted me on the CBTS board asking for whomever posted it and could source it would be paid a nice reward. Since the fake qresearch board had banned me and removed the info from the fake Q board, this </em>Always Be Questioning", whomever it is, was trying to find the original info. Apparently the poster is <strong>VERY RICH</strong>. I found out because someone told me that the reward was claimed and sent me the bitcoin account of the person who paid the reward. The account was drained by around <strong>ONE MILLION DOLLARS</strong> in block-chain currency, indicating that the poster <em>Always be Questioning</em> had paid-out the reward. Then information came-in that Pamphlet and Radix from the fake Patriot´s Soap box (who with Quantum Packets post as Q) had collected a <strong>ONE MILLION DOLLARS DONATION</strong>. So putting the facts together, I was able to figure-out what happened. Pamphet and Raddix claimed they posted the material, sourced it and sent the info to <em>Always Be Questioning</em> after they banned the person who posted the information = <strong>ME</strong>!! They then collected the <strong>ONE MILLION DOLLAR REWARD</strong> and proceeded to ban me any attempts I made to post on the fake Q board! They then mocked me and made fun of me, callingme a "Pelican", after they stole the ONE MILLION DOLLAR REWARD! Nemo, Jordan Sather, Pamphlet anon - all the fake Patriot Soap Box people are scammers, ex criminals. UNIrock has explained in his videos how Nemo had a one million dollar bond on him!  So these scammers stole the movement I, Trump and Stephen Miller created, stole the ONE MILLION DOLLAR reward, and are not scamming the entire planet with a fake Q larp which is actually connected to the illegal Mueller Operation Cross-Fire Hurricane turned coup to impeach Trump! THEY ARE ALL SCAMMERS, LIARS, THIEVES, THE WORST SCUM OF THE EARTH!  <br><br>Continued next post...</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="767"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-767">
+  <span class="labelSubject">Q-SOURCE-X</span>
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">10/14/2018 (Sun) 16:11:21</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/767.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#767">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q767">767</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#766">&gt;&gt;766</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#765">&gt;&gt;765</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#758">&gt;&gt;758</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#764">&gt;&gt;764</a><br><br>Continued from previous posts..<br><br>► Mueller, Rosenstein, Jeff SESsions, Huber, Kansas - are all SES members. The SES runs a shadow crime syndicate and per the info of Able Danger even have guns for hire! HC and the SES -SERCO - British Privy Council - Soros hold the digital keys to the Internet per the info we - AIM, Americans for Innovation - Leader Technologies has uncovered!  So they black-mail Congress, black-mail the FBI and are the same ones guilty of 9-11 crimes, of supporting terrorists, of running the Uzbekistan truckers through the U.S. to transport the illegal depleted uranium materials through Canada and run the URANIUM CRIME SYNDICATE and the Project Pelican Crime Syndicate. It is all connected! Dianne Feinstein and Mitt Romney also help rig the U.S. elections with the help of Soros and his SMART-MATIC - DIABOLT electronic voting machines! The same people illegally formed the Office of Special Council in a past administration, WITHOUT THE APPROVAL OF CONGRESS. It was formed as an entity to go after political enemies!! The Senior Executive Services was also formed illegally in a past administration and Leader Tech has also confirmed this! The same people - HC are guilty of stealing the trillions in the commercial TDA accounts, stealing the gold under the Twin towers. Obama illegally printed something like 10 trillion dollars in Indonesia so his CIA which controls HC - Bush - Obama could commit more crimes! Bitcoin was a scam set-up on Diego Garcia Island also by HC -Mueller, the Pentagon and the NSA! The FBI holds at least 30% of all their money in Bitcoin! (And most likely the earnings they get from SRoad). The FBI has recently stolen millions in Civil War era gold that prospectors discovered also! The story came-out the other day!  The British organize the false flags on U.S. soil and use Red Squadron teams and the SES crime-syndicate help them! The wife of Rosenstein Lisa Barsoomian is the shot blocker for the crimes of these organizations and Intel agencies and as a result of Task Force denouncing this, she was murdered! (The aid of GW).<br><br>I just watched your video also Lestat.  Sorry for the delay...as had not been around this board  much.. The Seven Sevens &amp; End-chan Q-SOURCE X crack the 4-chan - 8-chan fake Q anon. This is the message I get at first glance. Thank you for the support!<br><br>I look forward to hearing from you again!<br><br><em>Q-SOURCE-X</em></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="768"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-768">
+  <span class="labelSubject">Q-SOURCE-X</span>
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">10/14/2018 (Sun) 16:16:21</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/768.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#768">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q768">768</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/c4d37f821e186f1bcfc662de66ad023f-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">36.30 KB</span>
+  <span class="dimensionLabel">680x453</span> <a class="originalNameLink" href="/.media/c4d37f821e186f1bcfc662de66ad023f-imagejpeg.jpg" download="QmP9po24fNzuDngbEJuNFhqGix8XaVHpPSVRuG4nyAeH2T.jpg">QmP9po24fNzuDngbEJuNFhqGix8XaVHpPSVRuG4nyAeH2T.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/c4d37f821e186f1bcfc662de66ad023f-imagejpeg.jpg" data-filewidth="680" data-fileheight="453" data-filemime="image/jpeg"><img src="/.media/t_c4d37f821e186f1bcfc662de66ad023f-imagejpeg" width="255" height="170"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#758">&gt;&gt;758</a><br><a class="quoteLink" href="/aaanwopros/res/424.html#767">&gt;&gt;767</a><br><br>Continued...<br><br><u>Please see my board here Lestat, for recent posts and threads:</u><br><br><span class="redText">The Legit Q-SOURCE-X Plan To Re-Unite North &amp; South Korea.</span><br><br><a rel="nofollow" target="_blank" href="https://busy.org/<span class=" redmemetext"="">motherlibertynow/the-legit-q-source-x-plan-to-re-unite-north-and-south-korea"&gt;https://busy.orgmotherlibertynow/the-legit-q-source-x-plan-to-re-unite-north-and-south-korea</a><br><br> <strong>Q-SOURCE-X, the "Q" Before There was a "Q".</strong><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/qsourcex/res/174.html">https://8ch.net/qsourcex/res/174.html</a><br><br><a rel="nofollow" target="_blank" href="https://grandmasterssite.wordpress.com/">https://grandmasterssite.wordpress.com/</a><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/qsourcex/catalog.html">https://8ch.net/qsourcex/catalog.html</a><br><br><u>Please find more info here also:</u><br><br><span class="redText">The Story of Legit Q - Evidence &amp; Detailed Explanation</span><br><br><a rel="nofollow" target="_blank" href="https://busy.org/<span class=" redmemetext"="">motherlibertynow/the-story-of-legit-q-evidence-and-detailed-explanation"&gt;https://busy.orgmotherlibertynow/the-story-of-legit-q-evidence-and-detailed-explanation</a><br><br><strong>The Full complete History of Q Anon From Inception To Take-Down!!</strong><br><br><a rel="nofollow" target="_blank" href="https://busy.org/<span class=" redmemetext"="">motherlibertynow/the-history-of-q-anon-from-inception-to-take-down"&gt;https://busy.orgmotherlibertynow/the-history-of-q-anon-from-inception-to-take-down</a><br><br> <span class="redText">Q SOURCE-X Exposes The Fake Q Larp!</span><br><br><a rel="nofollow" target="_blank" href="https://busy.org/<span class=" redmemetext"="">motherlibertynow/q-source-x-exposes-fake-q-larp"&gt;https://busy.orgmotherlibertynow/q-source-x-exposes-fake-q-larp</a><br><br>Thank you again and I look forward to hearing from you again!!<br><br><em>Q-SOURCE-X</em><br><br><a rel="nofollow" target="_blank" href="https://8ch.net/qsourcex/catalog.html">https://8ch.net/qsourcex/catalog.html</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="809"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-809">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">11/25/2019 (Mon) 04:24:24</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/809.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#809">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q809">809</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/d96a0fa0444a3e771dd1409669b1abec-imagegif.gif">Open File</a>(<span class="sizeLabel">3.61 MB</span>
+  <span class="dimensionLabel">672x376</span> <a class="originalNameLink" href="/.media/d96a0fa0444a3e771dd1409669b1abec-imagegif.gif" download="1f1928d70b5f1f4a5c5c6cedd2352839-imagegif.gif">1f1928d70b5f1f4a5c5c6cedd2352839-imagegif.gif</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/d96a0fa0444a3e771dd1409669b1abec-imagegif.gif" data-filewidth="672" data-fileheight="376" data-filemime="image/gif"><img src="/.media/t_d96a0fa0444a3e771dd1409669b1abec-imagegif" width="255" height="143"></a></figure></div>
+  <div class="divMessage"></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="811"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-811">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">11/25/2019 (Mon) 04:27:20</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/811.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#811">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q811">811</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/6971db198c91ad5e5c11d81d111febf3-imagepng.png">Open File</a>(<span class="sizeLabel">673.07 KB</span>
+  <span class="dimensionLabel">848x492</span> <a class="originalNameLink" href="/.media/6971db198c91ad5e5c11d81d111febf3-imagepng.png" download="6971db198c91ad5e5c11d81d111febf3-imagepng.png">6971db198c91ad5e5c11d81d111febf3-imagepng.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/6971db198c91ad5e5c11d81d111febf3-imagepng.png" data-filewidth="848" data-fileheight="492" data-filemime="image/png"><img src="/.media/t_6971db198c91ad5e5c11d81d111febf3-imagepng" width="255" height="148"></a></figure></div>
+  <div class="divMessage"></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="812"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-812">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">11/25/2019 (Mon) 04:28:11</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/812.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#812">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q812">812</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/0ca986f05a159463d9620be21c6fb573-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">194.51 KB</span>
+  <span class="dimensionLabel">560x560</span> <a class="originalNameLink" href="/.media/0ca986f05a159463d9620be21c6fb573-imagejpeg.jpg" download="0ca986f05a159463d9620be21c6fb573-imagejpeg.jpg">0ca986f05a159463d9620be21c6fb573-imagejpeg.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/0ca986f05a159463d9620be21c6fb573-imagejpeg.jpg" data-filewidth="560" data-fileheight="560" data-filemime="image/jpeg"><img src="/.media/t_0ca986f05a159463d9620be21c6fb573-imagejpeg" width="255" height="255"></a></figure></div>
+  <div class="divMessage"></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="813"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-813">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">11/25/2019 (Mon) 04:28:56</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/813.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#813">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q813">813</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/9ed936300f264aeaf2a594a8d68cdfed-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">456.47 KB</span>
+  <span class="dimensionLabel">1772x1772</span> <a class="originalNameLink" href="/.media/9ed936300f264aeaf2a594a8d68cdfed-imagejpeg.jpg" download="9ed936300f264aeaf2a594a8d68cdfed-imagejpeg.jpg">9ed936300f264aeaf2a594a8d68cdfed-imagejpeg.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/9ed936300f264aeaf2a594a8d68cdfed-imagejpeg.jpg" data-filewidth="1772" data-fileheight="1772" data-filemime="image/jpeg"><img src="/.media/t_9ed936300f264aeaf2a594a8d68cdfed-imagejpeg" width="255" height="255"></a></figure></div>
+  <div class="divMessage"></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="882"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-882">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">11/27/2019 (Wed) 11:19:14</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/882.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#882">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q882">882</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#809">&gt;&gt;809</a><br><br>That motion of Trump forming a "Q" was done by The Shadow Government using sophisticated video editing... Trump never made those hand gestures in that manner. This is the same they did to the LaVoy Finicum gestures, to make it look like he was pulling a gun, when he was only placing his hand over the area where he had been shot. Now the CIA edits Ginsburg videos as well. And you fell for it!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="971"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-971">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">12/17/2019 (Tue) 01:27:58</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/971.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#971">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q971">971</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Now you know the truth.<br><br>X</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="972"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-972">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">12/17/2019 (Tue) 01:28:37</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/972.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#972">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q972">972</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#813">&gt;&gt;813</a><br><br>I have heard that before...what does it mean?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="1007"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-1007">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">12/17/2019 (Tue) 14:15:03</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/1007.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#1007">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q1007">1007</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/aaanwopros/res/424.html#425">&gt;&gt;425</a><br><br>Watch as fake Q burns-up as we expose the larp it is!</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="1046"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-1046">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">12/19/2019 (Thu) 16:33:55</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/1046.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#1046">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q1046">1046</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">This is a gift to you so you will know the truth.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="aaanwopros" id="1047"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="aaanwopros-424-1047">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">12/20/2019 (Fri) 13:54:15</span>
+  
+  <a class="linkPreview" href="/aaanwopros/preview/1047.html">[Preview]</a>
+  <a class="linkSelf" href="/aaanwopros/res/424.html#1047">No.</a><a class="linkQuote" href="/aaanwopros/res/424.html#q1047">1047</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">So who is the original creator of Q anon? Does it matter? Who is lying and who is telling the truth? If you were to find-out answers to these questions, would it make a difference? If you knew you were following the wrong version of Q and by finding the truth, the planet will be able to truly restore the republic 100 times faster, would you not care to know?<br><br>These posts explain it all nicely:<br><br><a class="quoteLink" href="/qrbunker/res/4762.html#5330">&gt;&gt;&gt;/qrbunker/5330</a><br><a class="quoteLink" href="/qrbunker/res/4762.html#5331">&gt;&gt;&gt;/qrbunker/5331</a><br><a class="quoteLink" href="/qrbunker/res/4762.html#5329">&gt;&gt;&gt;/qrbunker/5329</a><br><a class="quoteLink" href="/qrbunker/res/4762.html#5328">&gt;&gt;&gt;/qrbunker/5328</a><br><br>This video explains even more:<br><br><a rel="nofollow" target="_blank" href="https://www.bitchute.com/video/jpwTlEVNomNj/">https://www.bitchute.com/video/jpwTlEVNomNj/</a><br><br>And then this post helps to really explain it:<br><br><a class="quoteLink" href="/qanonresearch/res/42560.html#42790">&gt;&gt;&gt;/qanonresearch/42790</a><br><br><strong>Look into it. It means the difference between chasing down rabbit holes for years on end versus restoring the Republic NOW.</strong></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div></div>
+      <hr>
+      <a name="bottom"></a>
+      <p class="bottomNav">
+        <a class="topLink" href="#">Top</a> |
+        <!-- .. doesn't work in mod.js -->
+        <a class="catalogLink" href="../catalog.html">Catalog</a> |
+        <a class="replyLink" href="#" onclick="show_quick_reply(); return false;">Post a reply</a> |
+        <a class="magratheaLink" title="Future site frontend" href="https://magrathea.endchan.net/aaanwopros/thread/424.html">Magrathea</a> |
+        <a class="returnLink" href="..">Return</a>
+      </p>
+
+      <div class="divRefresh hidden">
+        <label><input type="checkbox" checked="" onchange="changeRefresh()">
+          Auto <span id="labelRefresh"></span>
+        </label>
+        <input type="button" id="refreshButton" onclick="refreshPosts(true)" value="Refresh">
+      </div>
+      <br>
+      <br>
+
+      <select name="switchlayoutcontrol" size="1" onchange="chooseStyle(this.options[this.selectedIndex].value, 'layout')"></select>
+      <select name="switchcolorcontrol" size="1" onchange="chooseStyle(this.options[this.selectedIndex].value, 'color')"></select>
+
+      <!-- ban/report/delete/transfer controls -->
+      <div class="contentAction">
+        <label>Reason:<input type="text" id="reportFieldReason" name="reason">
+        </label>
+        
+        <label>Password:<input type="password" id="deletionFieldPassword" name="password">
+        </label>
+        <label><input type="checkbox" id="checkboxGlobal" name="global">
+          Global
+        </label>
+        <label><input type="checkbox" id="checkboxOnlyFiles" name="deleteUploads">
+          Remove media from post
+        </label>
+        <label><input type="checkbox" id="checkboxMediaDeletion" name="deleteMedia">
+          Scrub media (remove image from site)
+        </label>
+        <img id="captchaImageReport" class="captchaImage" src="/captcha.js">
+        <div class="buttonBox">
+          <input type="button" class="hidden" id="reloadCaptchaButtonReport" onclick="reloadCaptcha()" value="Reload">
+          <input name="captcha" type="text" id="fieldCaptchaReport" placeholder="Answer">
+          <a class="small" href="/noCookieCaptcha.js" target="_blank">No cookies?</a>
+        </div>
+        <div class="buttonBox">
+          <input type="submit" id="deleteFormButton" value="Delete" name="action">
+          <input type="button" class="hidden" id="deleteJsButton" onclick="deletePosts()" value="Delete">
+          <input type="submit" id="reportFormButton" value="Report" name="action">
+          <input type="button" class="hidden" id="reportJsButton" onclick="reportPosts()" value="Report">
+        </div>
+      </div>
+    </form>
+    <script src="/.static/qr.js" defer=""></script>
+  </div>
+
+
+
+</body></html>

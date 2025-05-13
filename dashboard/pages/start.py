@@ -1,11 +1,8 @@
 # app.py
 import streamlit as st
 from pathlib import Path
-import os, time
 import pandas as pd
 from datetime import datetime, timedelta, timezone
-import pytz
-import logging
 import altair as alt
 from config import DATA_DIR, MODE, ENTITIES, DEFAULT_PATH, WAR_RELATED_PATH, WAR_RELATED_NER_PATH
 from preprocess_datasets_for_dashboard import Extract, Preprocessor, Transformer

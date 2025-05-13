@@ -1,0 +1,2780 @@
+<!DOCTYPE html><html><head>
+  <!-- add metadata about your site here -->
+  <meta charset="UTF-8">
+  <!-- link to your base url here -->
+  <!-- base href="/" -->
+  <!-- link to your CSS here -->
+  <link href="/.static/global.css" type="text/css" rel="stylesheet">
+  <link href="/.static/font-awesome.min.css" type="text/css" rel="stylesheet">
+  <link href="/.static/css/PenumbraLynx/watcher.css" type="text/css" rel="stylesheet">
+  <script src="/.static/switcher.js"></script>
+  <script src="/.static/favorites.js"></script>
+  <!-- don't add a title, the engine already does that for you -->
+  <!-- link to any scripts you need here -->
+  <!-- needs boardUri to work -->
+  <script src="/.static/showHide.js" defer=""></script>
+  <script src="/.static/settings.js" defer=""></script>
+  <script src="/.static/api.js" defer=""></script>
+  <script src="/.static/embed.js" defer=""></script>
+  <script src="/.static/overboard.js" defer=""></script>
+  <script src="/.static/posting.js" defer=""></script>
+  <script src="/.static/captcha.js" defer=""></script>
+  <script src="/.static/js/announcements.js" defer=""></script>
+  <script src="/.static/js/PenumbraLynx/watcher.js" defer=""></script>
+  <link href="/overboard/index.rss" rel="alternate" type="application/rss+xml" title="Endchan Overboard">
+<title>Multi-board</title></head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <span>[</span>
+    <a href="/" id="navLinkHome">home</a>
+    <span>/</span>
+    <a href="/boards.js" id="navBoardList">boards</a>
+    <span>/</span>
+    <a href="/overboard_sfw" class="navOverboard">SFW overboard</a>
+    <span>/</span>
+    <a href="/overboard" class="navOverboard">NSFW overboard</a>
+    <span>/</span>
+    <a href="/account.js" id="linkAccount">account</a>
+    <span>/</span>
+    <a href="/.static/posting.html" id="navPosting">help</a>
+    <span>]</span>
+    <span>[</span>
+      <a rel="nofollow" target="_blank" href="https://qchat.rizon.net/?channels=endchan"><i class="fa fa-quote-right" title="Chat"></i> irc</a>
+    <span>/</span>
+      <a rel="nofollow" target="_blank" href="https://twitter.com/endchanxyz"><i class="fa fa-twitter" title="Twitter"></i></a>
+    <span>]</span>
+  </nav>
+
+<script>
+var useFav = false;
+
+function scanPage() {
+
+  var bFiltersElem=document.getElementById('boardFilters');
+  bFiltersElem.onkeyup=function() {
+    bFiltersElem.value = bFiltersElem.value.replace('/', '');
+  }
+  //console.log('bFiltersElem.value', bFiltersElem.value);
+  var boardFilters=bFiltersElem.value.split(/, */);
+
+  // run filter on content
+  var elem=document.getElementById('divThreads');
+
+  //for(var i in elem.children) {
+  var len=elem.children.length;
+  for(var i=0; i<len; i++) {
+    var div = elem.children[i];
+    //console.log(i, 'looking at', div.dataset.boarduri);
+    var current=div.style.display != 'none'?true:false;
+    next=true;
+    if (useFav) {
+      if (favoritesList.indexOf(div.dataset.boarduri)===-1) {
+        // hide it
+        next=false;
+      }
+    }
+    // apply filters to favorites
+    if (boardFilters.indexOf(div.dataset.boarduri)!==-1) {
+      next=false;
+    }
+    if (next!=current) {
+      div.style.display=next?'block':'none';
+    }
+  }
+}
+
+
+function startUI() {
+  // read favorites
+  var favoritesStr=getSetting('endchan_favorites');
+  favoritesList=[]; // clear it out
+  if (favoritesStr) {
+    favoritesList=favoritesStr.split(/,/);
+  }
+
+  // set up UI
+  var favCB=document.getElementById('useFavCheckBox');
+  useFav=favCB.checked
+
+  // has to have favCB set up
+  function updateFavFilter() {
+    useFav=favCB.checked;
+  }
+
+  favCB.onclick=function() {
+    updateFavFilter();
+    //console.log('setting', useFav);
+    //if (useFav) {
+    setSetting('eos_useFav', useFav, 365*10);
+    scanPage();
+    //clearList();
+    //updateHomepage();
+  }
+
+  var turnOn=getSetting('eos_useFav');
+  //console.log('turnOn', turnOn, typeof(turnOn));
+  if (turnOn=='true') {
+    //console.log('marking favs only')
+    favCB.checked=true
+    updateFavFilter()
+    //console.log('setting', useFav);
+  //} else {
+    // defeat browse shit?
+    //favCB.checked=false
+  }
+
+  // load filters
+  var boardFilterSetting = getSetting('eos_boardfilter')
+  console.log('eos_boardfilter', boardFilterSetting);
+  var bFiltersElem=document.getElementById('boardFilters');
+  bFiltersElem.value=boardFilterSetting;
+
+}
+
+function saveBoardFilter() {
+  var bFiltersElem=document.getElementById('boardFilters');
+  var days=365*10; // remember this setting for 10 years
+  setSetting('eos_boardfilter', bFiltersElem.value, days);
+  scanPage();
+  //clearList();
+  console.log('saved', bFiltersElem.value, 'in eos_boardfilter');
+}
+</script>
+
+  <!-- board header -->
+  <header class="boardHeader">
+    <img id="bannerImage" src="/randomBanner.js">
+    <input id="boardFilters" type="text" placeholder="comma separate list of boardUris to filters" style="width: 300px">
+    <button onclick="saveBoardFilter();">Save</button>
+    <button onclick="scanPage();">Filter</button>
+    <label><input id="useFavCheckBox" type="checkbox"> Only show favorites</label>
+  </header>
+  <script>startUI();</script>
+
+  <div id="threadList">
+    <div id="divThreads"><div data-boarduri="r9k" class="opCell" id="437"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/497c01c2bc5deaa1e882fc9c41014dab-imagepng.png">Open File</a>(<span class="sizeLabel">728.60 KB</span>
+  <span class="dimensionLabel">750x990</span> <a class="originalNameLink" href="/.media/497c01c2bc5deaa1e882fc9c41014dab-imagepng.png" download="497c01c2bc5deaa1e882fc9c41014dab.png">497c01c2bc5deaa1e882fc9c41014dab.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/497c01c2bc5deaa1e882fc9c41014dab-imagepng.png" data-filewidth="750" data-fileheight="990" data-filemime="image/png"><img src="/.media/t_497c01c2bc5deaa1e882fc9c41014dab-imagepng" loading="lazy" width="193" height="255"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-437">
+    <span class="labelSubject">Robot general: welcoming committee edition</span>
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">07/16/2020 (Thu) 03:01</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/437.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/437.html#437">No.</a>
+    <a class="linkQuote" href="/r9k/res/437.html#q437">437</a>
+    <a class="linkReply" href="/r9k/res/437.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=437">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">I'm calling it that because the QTTDTOT threads were generals anyway. Post anything that's been going on in your life you feel like talking about. If you're just joining us, it's good to have you here again, bot.</div>
+  
+  
+  
+  <div class="labelOmission">10 posts and 3 images omitted.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="458"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-437-458">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/27/2020 (Mon) 03:58:22</span>
+  
+  <a class="linkPreview" href="/r9k/preview/458.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/437.html#458">No.</a><a class="linkQuote" href="/r9k/res/437.html#q458">458</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/437.html#457">&gt;&gt;457</a><br><a rel="nofollow" target="_blank" href="https://support.mozilla.org/en-US/questions/1164647">https://support.mozilla.org/en-US/questions/1164647</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="459"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-437-459">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/27/2020 (Mon) 04:00:21</span>
+  
+  <a class="linkPreview" href="/r9k/preview/459.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/437.html#459">No.</a><a class="linkQuote" href="/r9k/res/437.html#q459">459</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/437.html#458">&gt;&gt;458</a><br><a rel="nofollow" target="_blank" href="https://support.mozilla.org/en-US/questions/914393">https://support.mozilla.org/en-US/questions/914393</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="460"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-437-460">
+  
+  <a class="linkName" href="mailto:sage">Robot</a>
+  
+  
+  <span class="labelCreated">07/29/2020 (Wed) 18:14:15</span>
+  
+  <a class="linkPreview" href="/r9k/preview/460.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/437.html#460">No.</a><a class="linkQuote" href="/r9k/res/437.html#q460">460</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/8c83f91ef613c77f7723d4203cea9f4f-videomp4.mp4">Open File</a>(<span class="sizeLabel">893.65 KB</span>
+  <span class="dimensionLabel">1440x1080</span> <a class="originalNameLink" href="/.media/8c83f91ef613c77f7723d4203cea9f4f-videomp4.mp4" download="apustajaillistys.mp4">apustajaillistys.mp4</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/8c83f91ef613c77f7723d4203cea9f4f-videomp4.mp4" data-filewidth="1440" data-fileheight="1080" data-filemime="video/mp4"><img src="/.media/t_8c83f91ef613c77f7723d4203cea9f4f-videomp4" width="255" height="191"></a></figure></div>
+  <div class="divMessage">APU IS FINNISH FROM YLILAUTA NOT FROM 4GAG AND IIRC THE VIDEO OF APU IN A STORE WAS FROM /R9K/<br>FUCKING NEWNIGGERS<br>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="461"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-437-461">
+  
+  <a class="linkName" href="mailto:sage">Robot</a>
+  
+  
+  <span class="labelCreated">07/29/2020 (Wed) 18:16:10</span>
+  
+  <a class="linkPreview" href="/r9k/preview/461.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/437.html#461">No.</a><a class="linkQuote" href="/r9k/res/437.html#q461">461</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/7f5f06fd1c6615580be3d266ca7b5bf1-imagepng.png">Open File</a>(<span class="sizeLabel">229.71 KB</span>
+  <span class="dimensionLabel">511x465</span> <a class="originalNameLink" href="/.media/7f5f06fd1c6615580be3d266ca7b5bf1-imagepng.png" download="bad quality crop.png">bad quality crop.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/7f5f06fd1c6615580be3d266ca7b5bf1-imagepng.png" data-filewidth="511" data-fileheight="465" data-filemime="image/png"><img src="/.media/t_7f5f06fd1c6615580be3d266ca7b5bf1-imagepng" width="255" height="232"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/437.html#452">&gt;&gt;452</a><br>Fuck off newfag.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="506"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-437-506">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">03/28/2024 (Thu) 01:32</span>
+  
+  <a class="linkPreview" href="/r9k/preview/506.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/437.html#506">No.</a><a class="linkQuote" href="/r9k/res/437.html#q506">506</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a rel="nofollow" target="_blank" href="http://gifts.anonblogd4pcarck2ff6qlseyawjljaatp6wjq6rqpet2wfuoom42kyd.onion/">http://gifts.anonblogd4pcarck2ff6qlseyawjljaatp6wjq6rqpet2wfuoom42kyd.onion/</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="496"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/b77718f65bb0cdd98254302e6ed8088f-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">1.09 MB</span>
+  <span class="dimensionLabel">2200x3300</span> <a class="originalNameLink" href="/.media/b77718f65bb0cdd98254302e6ed8088f-imagejpeg.jpg" download="how to turn someone into a gay pedo.jpg">how to turn someone into a gay pedo.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/b77718f65bb0cdd98254302e6ed8088f-imagejpeg.jpg" data-filewidth="2200" data-fileheight="3300" data-filemime="image/jpeg"><img src="/.media/t_b77718f65bb0cdd98254302e6ed8088f-imagejpeg" width="170" height="255"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-496">
+    
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">03/24/2022 (Thu) 17:27:26</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/496.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/496.html#496">No.</a>
+    <a class="linkQuote" href="/r9k/res/496.html#q496">496</a>
+    <a class="linkReply" href="/r9k/res/496.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=496">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Pedophiles don't exit, it's a meaningless word used to harass and jail people. Here's my arguments:<br>1) I never seen a pedphile<br>2) no one can define a pedophile<br>3) all pedophiles are very different from each other, so the word isn't even harassing a specific group</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="505"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-496-505">
+  
+  <a class="linkName" href="mailto:Sneederman">Robot</a>
+  
+  
+  <span class="labelCreated">12/05/2022 (Mon) 03:05</span>
+  
+  <a class="linkPreview" href="/r9k/preview/505.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/496.html#505">No.</a><a class="linkQuote" href="/r9k/res/496.html#q505">505</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/496.html#496">&gt;&gt;496</a><br><span class="greenText">&gt;no-one can define a pedophile</span><br>a pedophile is someone who is attracted to kids<br>a kid is someone who has not begun puberty (~10)</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell multipleUploads" id="487"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/2c952e49afcc6516b68a6e29fe950e67-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">196.98 KB</span>
+  <span class="dimensionLabel">1280x720</span> <a class="originalNameLink" href="/.media/2c952e49afcc6516b68a6e29fe950e67-imagejpeg.jpg" download="WIN_20210811_21_17_06_Pro.jpg">WIN_20210811_21_17_06_Pro.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/2c952e49afcc6516b68a6e29fe950e67-imagejpeg.jpg" data-filewidth="1280" data-fileheight="720" data-filemime="image/jpeg"><img src="/.media/t_2c952e49afcc6516b68a6e29fe950e67-imagejpeg"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/45d44e9b1b8ec376af323d262d6cd34b-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">192.38 KB</span>
+  <span class="dimensionLabel">1280x720</span> <a class="originalNameLink" href="/.media/45d44e9b1b8ec376af323d262d6cd34b-imagejpeg.jpg" download="WIN_20210811_21_17_23_Pro.jpg">WIN_20210811_21_17_23_Pro.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/45d44e9b1b8ec376af323d262d6cd34b-imagejpeg.jpg" data-filewidth="1280" data-fileheight="720" data-filemime="image/jpeg"><img src="/.media/t_45d44e9b1b8ec376af323d262d6cd34b-imagejpeg"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-487">
+    <span class="labelSubject">I just want to die</span>
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">08/11/2021 (Wed) 20:28:51</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/487.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/487.html#487">No.</a>
+    <a class="linkQuote" href="/r9k/res/487.html#q487">487</a>
+    <a class="linkReply" href="/r9k/res/487.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=487">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Im really ugly with no social skills and everybody hates me I have no chance at life im so patchtic that i cant even attempt sucide right. I wish dying was easy because im done with being an uglly awkward piece of shit.</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="490"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-487-490">
+  <span class="labelSubject">Dont do it.</span>
+  <a class="linkName noEmailName">Tony</a>
+  
+  
+  <span class="labelCreated">01/10/2022 (Mon) 22:58:08</span>
+  
+  <a class="linkPreview" href="/r9k/preview/490.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/487.html#490">No.</a><a class="linkQuote" href="/r9k/res/487.html#q490">490</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I've been down that road before and im still in a place where i wish i was dead. I hate all the decisions I made but its never worth taking your life. If you wanna talk man im here.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="491"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-487-491">
+  
+  <a class="linkName noEmailName">Robot</a>
+  <img class="imgFlag" src="/r9k/flags/568b5d9e3ada66464614709d" title="Robot">
+  
+  <span class="labelCreated">02/21/2022 (Mon) 07:54:52</span>
+  
+  <a class="linkPreview" href="/r9k/preview/491.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/487.html#491">No.</a><a class="linkQuote" href="/r9k/res/487.html#q491">491</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/487.html#490">&gt;&gt;490</a>
+<br><span class="greenText">&gt;but its never worth taking your life</span>
+<br>Nah it is half the time. Cope or rope you have to choose: death or lies.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="494"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-487-494">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">02/22/2022 (Tue) 12:39:01</span>
+  
+  <a class="linkPreview" href="/r9k/preview/494.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/487.html#494">No.</a><a class="linkQuote" href="/r9k/res/487.html#q494">494</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/487.html#487">&gt;&gt;487</a><br>Cheer up. Never get down on who you are. Find what makes you unique. It's there.<br><br>Here<br><br><span class="youtube_wrapper">https://youtube.com/watch?v=UIxD1WjT8Rw [<a href="https://youtube.com/watch?v=UIxD1WjT8Rw">Embed</a>]</span></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="501"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-487-501">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">05/18/2022 (Wed) 23:57:19</span>
+  
+  <a class="linkPreview" href="/r9k/preview/501.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/487.html#501">No.</a><a class="linkQuote" href="/r9k/res/487.html#q501">501</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Fake Spoof Email Sender<br><a rel="nofollow" target="_blank" href="http://hxoddho4opnfvwieesqtjmblaltazvkp3fqfgawauzsex76q2jsxkqyd.onion/">http://hxoddho4opnfvwieesqtjmblaltazvkp3fqfgawauzsex76q2jsxkqyd.onion/</a><br><br>Credit Cards With High Balance<br><a rel="nofollow" target="_blank" href="http://7o6orgwyysbpulgsgzzda34zh6jmmtpq77ts2dag6si24yh72chkpaad.onion/">http://7o6orgwyysbpulgsgzzda34zh6jmmtpq77ts2dag6si24yh72chkpaad.onion/</a><br><br>The Secret Hidden Group Society<br><a rel="nofollow" target="_blank" href="http://yknbrx7zodg6uqi4fyl7tr6d3d5xklgq6d5qfsjem2b6bl2lniz7xeid.onion/">http://yknbrx7zodg6uqi4fyl7tr6d3d5xklgq6d5qfsjem2b6bl2lniz7xeid.onion/</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="504"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-487-504">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/24/2022 (Sun) 18:27:34</span>
+  
+  <a class="linkPreview" href="/r9k/preview/504.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/487.html#504">No.</a><a class="linkQuote" href="/r9k/res/487.html#q504">504</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/487.html#487">&gt;&gt;487</a>
+<br>nah cheer up brah you're not exactly in the ugly category, nigga look a little bit like a budget dexter and women loved watching that show for that faggot</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="497"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/30bbf0b8d5fa45923c200fd335438922-imagepng.png">Open File</a>(<span class="sizeLabel">324.10 KB</span>
+  <span class="dimensionLabel">724x669</span> <a class="originalNameLink" href="/.media/30bbf0b8d5fa45923c200fd335438922-imagepng.png" download="why is the board dead.png">why is the board dead.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/30bbf0b8d5fa45923c200fd335438922-imagepng.png" data-filewidth="724" data-fileheight="669" data-filemime="image/png"><img src="/.media/t_30bbf0b8d5fa45923c200fd335438922-imagepng" loading="lazy" width="255" height="236"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-497">
+    <span class="labelSubject">/2022/</span>
+    <a class="linkName noEmailName">Robot</a>
+    <img class="imgFlag" src="/r9k/flags/568b63900d87738c46a04cce" title="Wojak">
+    
+    <span class="labelCreated">04/04/2022 (Mon) 01:35:12</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/497.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/497.html#497">No.</a>
+    <a class="linkQuote" href="/r9k/res/497.html#q497">497</a>
+    <a class="linkReply" href="/r9k/res/497.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=497">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">How's your 2022 going so far? Any different from your previous years?</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="498"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-497-498">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">04/22/2022 (Fri) 22:53:29</span>
+  
+  <a class="linkPreview" href="/r9k/preview/498.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/497.html#498">No.</a><a class="linkQuote" href="/r9k/res/497.html#q498">498</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I do not have a gf yet...</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="502"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-497-502">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">06/07/2022 (Tue) 23:51:47</span>
+  
+  <a class="linkPreview" href="/r9k/preview/502.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/497.html#502">No.</a><a class="linkQuote" href="/r9k/res/497.html#q502">502</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">you are crqzzy thats why</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="488"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/a81fb78ca063f964eacb4191b619dd6a-imagepng.png">Open File</a>(<span class="sizeLabel">584.03 KB</span>
+  <span class="dimensionLabel">720x1600</span> <a class="originalNameLink" href="/.media/a81fb78ca063f964eacb4191b619dd6a-imagepng.png" download="Screenshot_20211007-032018.png">Screenshot_20211007-032018.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/a81fb78ca063f964eacb4191b619dd6a-imagepng.png" data-filewidth="720" data-fileheight="1600" data-filemime="image/png"><img src="/spoiler.png" width="115" height="255"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-488">
+    <span class="labelSubject">Not sure who trolls here</span>
+    <a class="linkName noEmailName">Robot</a>
+    <img class="imgFlag" src="/r9k/flags/568b65783ada6646461472ef" title="Give her the D">
+    
+    <span class="labelCreated">10/07/2021 (Thu) 09:22:47</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/488.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/488.html#488">No.</a>
+    <a class="linkQuote" href="/r9k/res/488.html#q488">488</a>
+    <a class="linkReply" href="/r9k/res/488.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=488">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">But yeah if this were to go viral on GETTR the trad cucks and thots would lose their shit. Hell Trump would personally approve maybe more tits will get shown<br><a rel="nofollow" target="_blank" href="https://gettr.com/post/pdfmf2f352">https://gettr.com/post/pdfmf2f352</a></div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="500"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-488-500">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">04/29/2022 (Fri) 01:07:08</span>
+  
+  <a class="linkPreview" href="/r9k/preview/500.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/488.html#500">No.</a><a class="linkQuote" href="/r9k/res/488.html#q500">500</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Fake Spoof Email Sender<br><a rel="nofollow" target="_blank" href="http://hxoddho4opnfvwieesqtjmblaltazvkp3fqfgawauzsex76q2jsxkqyd.onion/">http://hxoddho4opnfvwieesqtjmblaltazvkp3fqfgawauzsex76q2jsxkqyd.onion/</a><br><br>Credit Cards With High Balance<br><a rel="nofollow" target="_blank" href="http://7o6orgwyysbpulgsgzzda34zh6jmmtpq77ts2dag6si24yh72chkpaad.onion/">http://7o6orgwyysbpulgsgzzda34zh6jmmtpq77ts2dag6si24yh72chkpaad.onion/</a><br><br>Self Made Banks Accounts and Scans<br><a rel="nofollow" target="_blank" href="http://dro5jmleenxb43zh4nqo7meeo6ed4f7zwdpxkuucvdwfasv2uekwioyd.onion/">http://dro5jmleenxb43zh4nqo7meeo6ed4f7zwdpxkuucvdwfasv2uekwioyd.onion/</a><br><br>The Secret Hidden Group Society<br><a rel="nofollow" target="_blank" href="http://yknbrx7zodg6uqi4fyl7tr6d3d5xklgq6d5qfsjem2b6bl2lniz7xeid.onion/">http://yknbrx7zodg6uqi4fyl7tr6d3d5xklgq6d5qfsjem2b6bl2lniz7xeid.onion/</a><br><br>Tor Onion 3 Years Hosting<br><a rel="nofollow" target="_blank" href="http://dkz3awekpfp3kyt55gaegzznaggfxjkcesocjq4uawbacl43eiszlrqd.onion/">http://dkz3awekpfp3kyt55gaegzznaggfxjkcesocjq4uawbacl43eiszlrqd.onion/</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="434"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/6b8cc51a393bfb2bb20efe8f28e65920-videowebm">Open File</a>(<span class="sizeLabel">1.29 MB</span>
+  <span class="dimensionLabel">1280x960</span> <a class="originalNameLink" href="/.media/6b8cc51a393bfb2bb20efe8f28e65920-videowebm" download="theend.webm">theend.webm</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/6b8cc51a393bfb2bb20efe8f28e65920-videowebm" data-filewidth="1280" data-fileheight="960" data-filemime="video/webm"><img src="/.media/t_6b8cc51a393bfb2bb20efe8f28e65920-videowebm" loading="lazy"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-434">
+    <span class="labelSubject">Meta</span>
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">07/14/2020 (Tue) 20:46</span>
+    
+    
+    <span class="pinIndicator" title="Sticky"></span>
+    
+    
+    <a class="linkPreview" href="/r9k/preview/434.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/434.html#434">No.</a>
+    <a class="linkQuote" href="/r9k/res/434.html#q434">434</a>
+    <a class="linkReply" href="/r9k/res/434.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=434">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage"><span class="greenText">&gt;1. Obey endchan's global rules. <a rel="nofollow" target="_blank" href="https://endchan.net/.static/globalRules.html">https://endchan.net/.static/globalRules.html</a></span><br><span class="greenText">&gt;2. You must be a male virgin to post on this board. Exceptions to the second part may apply in very unique circumstances, such as in cases of rape, child abuse, etc.</span><br><span class="greenText">&gt;3. You must be at least 18 years old to post on this board. If you admit to being underage you're retarded enough to deserve a ban.</span><br><span class="greenText">&gt;4. Refrain from posting low quality threads and posts. Spam, roll threads, obvious bait, advertisements, normalfag/cyborg shit, etc. will be deleted.</span><br><span class="greenText">&gt;5. Posts made with the intention of derailing a rule abiding thread will be deleted.</span><br><span class="greenText">&gt;6. Check the catalog for similar topics before posting a new thread. Repetitive threads will be deleted. </span><br><span class="greenText">&gt;7. Keep blogposts in a FTDDTOT thread unless they're interesting enough to stand on their own and generate real discussion.</span><br><span class="greenText">&gt;8. Keep meta discussion and feedback in the sticky.</span><br><span class="greenText">&gt;9. Maintain the spirit of anonymity. No namefagging, tripfagging, avatarfagging, or signatures unless necessary for a specific thread. This rule will also encompass particularly unorthodox styles of writing that makes you clearly identifiable between threads.</span><br><span class="greenText">&gt;10. No instigating violence, ie: "You'll never do anything" posts or similar. /r9k/ is a board of peace.</span><br><span class="greenText">&gt;11. No "/r9gay/" posting</span><br><span class="greenText">&gt;12. No roastie worship, including "vtubers"</span><br>Rules and how the board is ran are always up for discussion.<br><br><span class="redText"><u>Main board</u></span><br><a rel="nofollow" target="_blank" href="https://zzzchan.xyz/r9k/index.html">https://zzzchan.xyz/r9k/index.html</a><br><a rel="nofollow" target="_blank" href="http://crghlabr45r5pqkgnbgehywk5nxutdks5iss7tabyux5psikqqjirryd.onion/r9k/">http://crghlabr45r5pqkgnbgehywk5nxutdks5iss7tabyux5psikqqjirryd.onion/r9k/</a></div>
+  <div class="contentOmissionIndicator">
+    <p>Message too long. Click <a class="linkFullText" href="/r9k/res/434.html">here</a> to view full text.</p>
+  </div>
+  
+  <div class="labelLastEdit">Edited last time by robot on 11/25/2020 (Wed) 01:35.</div>
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="442"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-434-442">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/16/2020 (Thu) 19:07:14</span>
+  
+  <a class="linkPreview" href="/r9k/preview/442.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/434.html#442">No.</a><a class="linkQuote" href="/r9k/res/434.html#q442">442</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><span class="greenText">&gt;deleting posts just because you don't like them</span><br><br>wow, quality</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="443"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-434-443">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/16/2020 (Thu) 19:44:14</span>
+  
+  <a class="linkPreview" href="/r9k/preview/443.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/434.html#443">No.</a><a class="linkQuote" href="/r9k/res/434.html#q443">443</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/434.html#442">&gt;&gt;442</a><br><span class="greenText">&gt;6. Check the catalog for similar topics before posting a new thread. Repetitive threads may be merged.</span><br>If you're referring to the thread I deleted, you made a thread quoting a post in the waifu thread about 2D girls. If this site was using a later version of lynxchan I would have just merged it, but it's not. It wasn't worth an entire thread. I don't like having to delete posts I would otherwise just move, but it's really not that difficult to meet the standards for a quality thread inciting meaningful discussion.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="462"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-434-462">
+  
+  <a class="linkName" href="mailto:sage">Robot</a>
+  
+  
+  <span class="labelCreated">07/29/2020 (Wed) 18:22:02</span>
+  
+  <a class="linkPreview" href="/r9k/preview/462.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/434.html#462">No.</a><a class="linkQuote" href="/r9k/res/434.html#q462">462</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/6a9de45912f5f3f01748495f8b89d9ae-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">300.85 KB</span>
+  <span class="dimensionLabel">1600x1200</span> <a class="originalNameLink" href="/.media/6a9de45912f5f3f01748495f8b89d9ae-imagejpeg.jpg" download="Imperial_Scout.jpg">Imperial_Scout.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/6a9de45912f5f3f01748495f8b89d9ae-imagejpeg.jpg" data-filewidth="1600" data-fileheight="1200" data-filemime="image/jpeg"><img src="/.media/t_6a9de45912f5f3f01748495f8b89d9ae-imagejpeg" width="255" height="191"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/434.html#442">&gt;&gt;442</a><br><span class="greenText">&gt;Posts made with the intention of derailing a rule abiding thread will be deleted.</span><br>Too subjective. Most BOs/vols in the past have been way too fucking stupid to judge properly, so I can't say you have the wisdom to do it right. Just remember not to appease the mob for the sake of it I guess and prefer high-quality over "free speech" like better sites in the far distant past.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="463"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-434-463">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/31/2020 (Fri) 00:41:19</span>
+  
+  <a class="linkPreview" href="/r9k/preview/463.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/434.html#463">No.</a><a class="linkQuote" href="/r9k/res/434.html#q463">463</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/434.html#462">&gt;&gt;462</a><br>That's one of the less subjective rules. Organically spawned off-topic discussion isn't much of a concern, but if people identify that a thread is veering way off course and someone goes out of their way to continue derailing or bring up completely irrelevant topics out of the blue they'll probably have their posts deleted.<br><span class="greenText">&gt;Just remember not to appease the mob for the sake of it I guess and prefer high-quality over "free speech" like better sites in the far distant past.</span><br>The only thing I can do is be as transparent as possible and let people decide for themselves if the way I moderate and curate post quality is to their liking. It's another reason I generally prefer jschan since you can make notes on virtually every single moderation action for the boards logs.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="471"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-434-471">
+  
+  <a class="linkName" href="mailto:sage">Robot</a>
+  
+  
+  <span class="labelCreated">08/05/2020 (Wed) 21:03:18</span>
+  
+  <a class="linkPreview" href="/r9k/preview/471.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/434.html#471">No.</a><a class="linkQuote" href="/r9k/res/434.html#q471">471</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/434.html#463">&gt;&gt;463</a><br>But it's not, kill yourself, fuck the BO.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="495"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-495">
+    <span class="labelSubject">&gt;tfw no girl scouts gf</span>
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">02/27/2022 (Sun) 04:03:33</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/495.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/495.html#495">No.</a>
+    <a class="linkQuote" href="/r9k/res/495.html#q495">495</a>
+    <a class="linkReply" href="/r9k/res/495.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=495">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">life is suffering! ;<u>_</u>;</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"></div>
+</div><div data-boarduri="spoon" class="opCell" id="2"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-2">
+    <span class="labelSubject">Chans</span>
+    <a class="linkName noEmailName">Anonymous</a>
+    
+    
+    <span class="labelCreated">02/02/2016 (Tue) 17:36:39</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/2.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/2.html#2">No.</a>
+    <a class="linkQuote" href="/spoon/res/2.html#q2">2</a>
+    <a class="linkReply" href="/spoon/res/2.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=2">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage"><span class="greenText">&gt;BBS scripts</span><br><a target="blank" href="http://flash.moe/overscript/">http://flash.moe/overscript/</a><br><br><span class="greenText">&gt;Image board lists</span><br><a target="blank" href="http://dramatica.org.ua/List_of_image_boards">http://dramatica.org.ua/List_of_image_boards</a> (if still down : <a target="blank" href="http://web.archive.org/web/20160829200019/http://dramatica.org.ua/List_of_image_boards">http://web.archive.org/web/20160829200019/http://dramatica.org.ua/List_of_image_boards</a> )<br><a target="blank" href="http://bitbin.it/emT3GJ1C/raw">http://bitbin.it/emT3GJ1C/raw</a><br><a target="blank" href="https://docs.google.com/document/d/1t10VI-sccy1CfAeMZHwmCS_7agIHFo_B5ipMjzsMtTg">https://docs.google.com/document/d/1t10VI-sccy1CfAeMZHwmCS_7agIHFo_B5ipMjzsMtTg</a><br><br><span class="greenText">&gt;Board consacred to imageboards</span><br><a target="blank" href="http://wakaba.c3.cx/soc">http://wakaba.c3.cx/soc</a><br><br>Will post a different chan everyday.</div>
+  
+  
+  <div class="labelLastEdit">Edited last time by Spoon on 01/06/2017 (Fri) 14:11:41.</div>
+  <div class="labelOmission">84 posts and 39 images omitted.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="spoon" id="304"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-2-304">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/01/2018 (Sun) 18:20:27</span>
+  
+  <a class="linkPreview" href="/spoon/preview/304.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/2.html#304">No.</a><a class="linkQuote" href="/spoon/res/2.html#q304">304</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/spoon/res/2.html#63">&gt;&gt;63</a><br>You might enjoy yourtilde.com.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1305"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-2-1305">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/31/2018 (Thu) 14:43:45</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1305.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/2.html#1305">No.</a><a class="linkQuote" href="/spoon/res/2.html#q1305">1305</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">megamilk is a fag just fuck my shitup</div>
+  
+  <div class="divBanMessage">user was returned to milkduds shithole</div>
+  <div class="labelLastEdit">Edited last time by wade on 06/01/2018 (Fri) 21:00:59.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1358"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-2-1358">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-cz" src="/.static/flags/cz.png" title="Czech Republic">
+  
+  <span class="labelCreated">06/09/2019 (Sun) 04:26:31</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1358.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/2.html#1358">No.</a><a class="linkQuote" href="/spoon/res/2.html#q1358">1358</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">up</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1359"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-2-1359">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+  
+  <span class="labelCreated">06/15/2019 (Sat) 02:55:57</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1359.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/2.html#1359">No.</a><a class="linkQuote" href="/spoon/res/2.html#q1359">1359</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/spoon/res/2.html#71">&gt;&gt;71</a><br>why you go away ;_;</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1360"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-2-1360">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+  
+  <span class="labelCreated">09/08/2019 (Sun) 19:18:43</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1360.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/2.html#1360">No.</a><a class="linkQuote" href="/spoon/res/2.html#q1360">1360</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/c7ce4b05e5f7852825b9a15587e26ad9-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">24.10 KB</span>
+  <span class="dimensionLabel">474x315</span> <a class="originalNameLink" href="/.media/c7ce4b05e5f7852825b9a15587e26ad9-imagejpeg.jpg" download="curedcarrots.jpeg">curedcarrots.jpeg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/c7ce4b05e5f7852825b9a15587e26ad9-imagejpeg.jpg" data-filewidth="474" data-fileheight="315" data-filemime="image/jpeg"><img src="/.media/t_c7ce4b05e5f7852825b9a15587e26ad9-imagejpeg" width="255" height="169"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/spoon/res/2.html#298">&gt;&gt;298</a><br><span class="greenText">&gt;mfw both are stil alive.</span><br>Who'd a thought</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="466"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/b78ae43b33f63147b1518870e23ee359-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">238.93 KB</span>
+  <span class="dimensionLabel">1354x1053</span> <a class="originalNameLink" href="/.media/b78ae43b33f63147b1518870e23ee359-imagejpeg.jpg" download="RomeFeelsGood.jpg">RomeFeelsGood.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/b78ae43b33f63147b1518870e23ee359-imagejpeg.jpg" data-filewidth="1354" data-fileheight="1053" data-filemime="image/jpeg"><img src="/.media/t_b78ae43b33f63147b1518870e23ee359-imagejpeg" width="255" height="198"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-466">
+    <span class="labelSubject">Slavery</span>
+    <a class="linkName noEmailName">Robot</a>
+    <img class="imgFlag" src="/r9k/flags/568b5cc6a7b4eb41469329ff" title="OP = Fag">
+    
+    <span class="labelCreated">08/04/2020 (Tue) 21:08:35</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/466.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/466.html#466">No.</a>
+    <a class="linkQuote" href="/r9k/res/466.html#q466">466</a>
+    <a class="linkReply" href="/r9k/res/466.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=466">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">If you could own a slave or slaves, would you? And if you have social anxiety, do you think you'd have trouble with someone you know is beneath you? I'd imagine it'd be easier for those with anxiety to deal with those who are beneath them and will do their every whim. Perhaps it may also help if they're normalfag slaves and the robot owner considers robots objectively superior to normalfags.</div>
+  
+  
+  
+  <div class="labelOmission">4 posts omitted.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="472"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-466-472">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">08/17/2020 (Mon) 16:20:54</span>
+  
+  <a class="linkPreview" href="/r9k/preview/472.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/466.html#472">No.</a><a class="linkQuote" href="/r9k/res/466.html#q472">472</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">What a hassssle. Even if you were nice to them they'd still resent you, and you'd have to interact with them all the time. Machinery was invented to free us from the slavery of nigger ownership.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="473"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-466-473">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">08/31/2020 (Mon) 13:04:50</span>
+  
+  <a class="linkPreview" href="/r9k/preview/473.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/466.html#473">No.</a><a class="linkQuote" href="/r9k/res/466.html#q473">473</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I wouldn't trust random noggers around me at any time.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="477"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-466-477">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">01/23/2021 (Sat) 15:29:22</span>
+  
+  <a class="linkPreview" href="/r9k/preview/477.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/466.html#477">No.</a><a class="linkQuote" href="/r9k/res/466.html#q477">477</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I already own a slave for since she was 15 now she is 26 and has 2 children with me. Literall slave</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="483"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-466-483">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">05/24/2021 (Mon) 10:22:34</span>
+  
+  <a class="linkPreview" href="/r9k/preview/483.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/466.html#483">No.</a><a class="linkQuote" href="/r9k/res/466.html#q483">483</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/fbaf815d7fe255032418e21dd94268c0-imagepng.png">Open File</a>(<span class="sizeLabel">1.83 MB</span>
+  <span class="dimensionLabel">2526x561</span> <a class="originalNameLink" href="/.media/fbaf815d7fe255032418e21dd94268c0-imagepng.png" download="KNOW YOUR RACE KNOW YOUR PLACE.png">KNOW YOUR RACE KNOW YOUR PLACE.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/fbaf815d7fe255032418e21dd94268c0-imagepng.png" data-filewidth="2526" data-fileheight="561" data-filemime="image/png"><img src="/.media/t_fbaf815d7fe255032418e21dd94268c0-imagepng"></a></figure></div>
+  <div class="divMessage">Obligatory mention of Dovahhatty</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="492"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-466-492">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">02/21/2022 (Mon) 07:57:07</span>
+  
+  <a class="linkPreview" href="/r9k/preview/492.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/466.html#492">No.</a><a class="linkQuote" href="/r9k/res/466.html#q492">492</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Having a slave would be nice... It would be weird if it was the Roman style where they slave is kinda part of your family; having him grab my pee jugs out of my room would be awkward.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="spoon" class="opCell" id="1381"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1381">
+    <span class="labelSubject">How to use Physics for destruction?</span>
+    <a class="linkName noEmailName">Anonymous</a>
+    
+    
+    <span class="labelCreated">04/11/2021 (Sun) 19:10:44</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1381.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1381.html#1381">No.</a>
+    <a class="linkQuote" href="/spoon/res/1381.html#q1381">1381</a>
+    <a class="linkReply" href="/spoon/res/1381.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1381">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">im in physics right now, but i want more, i want to learn how to create devices of destruction or use my knowledge for destruction in some way. where can i start on this path?</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="spoon" id="1386"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1381-1386">
+  <span class="labelSubject">reply to physics for destruction</span>
+  <a class="linkName noEmailName">anonymousgoof</a>
+  
+  
+  <span class="labelCreated">01/25/2022 (Tue) 03:25:48</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1386.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1381.html#1386">No.</a><a class="linkQuote" href="/spoon/res/1381.html#q1386">1386</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Hey did you ever get an answer to this? I'd like to see where I can market some of mine too! although mine may not be as destructive.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1387"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1381-1387">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-jp" src="/.static/flags/jp.png" title="Japan">
+  
+  <span class="labelCreated">02/09/2022 (Wed) 02:55:18</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1387.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1381.html#1387">No.</a><a class="linkQuote" href="/spoon/res/1381.html#q1387">1387</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/spoon/res/1381.html#1381">&gt;&gt;1381</a><br>I recommend pirating a bunch of high-level Physics textbooks and learning as much as possible about nuclear science. A kid managed to set off a slow nuclear reaction in his backyard once, so there are definitely things you can do.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="474"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-474">
+    <span class="labelSubject">I dont know what to write here</span>
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">11/25/2020 (Wed) 11:53:53</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/474.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/474.html#474">No.</a>
+    <a class="linkQuote" href="/r9k/res/474.html#q474">474</a>
+    <a class="linkReply" href="/r9k/res/474.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=474">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">I am happy for have found this board because 4chan r9k is full of normalfags. Sorry if my english is bad, i've recently lurnking and posting on english imageboard because i want to improve it.</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="476"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-474-476">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">12/11/2020 (Fri) 22:59:31</span>
+  
+  <a class="linkPreview" href="/r9k/preview/476.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/474.html#476">No.</a><a class="linkQuote" href="/r9k/res/474.html#q476">476</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">Most of us have gone here, OP: <a rel="nofollow" target="_blank" href="https://zzzchan.xyz/r9k/index.html">https://zzzchan.xyz/r9k/index.html</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="489"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-474-489">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">12/11/2021 (Sat) 18:23:49</span>
+  
+  <a class="linkPreview" href="/r9k/preview/489.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/474.html#489">No.</a><a class="linkQuote" href="/r9k/res/474.html#q489">489</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/474.html#476">&gt;&gt;476</a><br>Is that really the only place that is purely for lonely adult virgin males? It seems so slow.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="486"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-486">
+    
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">07/26/2021 (Mon) 05:23:04</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/486.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/486.html#486">No.</a>
+    <a class="linkQuote" href="/r9k/res/486.html#q486">486</a>
+    <a class="linkReply" href="/r9k/res/486.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=486">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">You is one brave man ? 
+<br>The world is bad for you ?
+<br>The world transform you in one bag trash ?
+<br>You have hate the people for this ?
+<br>You want restart the world ?
+<br>I know how make it !!!
+<br>One Bat, One puncture, One Brave man, and one bit luck, 
+<br>But if you survive,
+<br>You have the power for restart the world. 
+<br>With one bat virus inside in body.
+<br>The slavers no born of the free men.
+<br>Good look Brave Man</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"></div>
+</div><div data-boarduri="r9k" class="opCell" id="484"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/69bc1449de179a6af9e2d19e60a14c34-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">111.98 KB</span>
+  <span class="dimensionLabel">597x900</span> <a class="originalNameLink" href="/.media/69bc1449de179a6af9e2d19e60a14c34-imagejpeg.jpg" download="BAFA2EDC-A932-43CA-BCC8-B0E31E7A1929.jpeg">BAFA2EDC-A932-43CA-BCC8-B0E31E7A1929.jpeg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/69bc1449de179a6af9e2d19e60a14c34-imagejpeg.jpg" data-filewidth="597" data-fileheight="900" data-filemime="image/jpeg"><img src="/.media/t_69bc1449de179a6af9e2d19e60a14c34-imagejpeg" width="169" height="255"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-484">
+    
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">06/13/2021 (Sun) 22:10:07</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/484.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/484.html#484">No.</a>
+    <a class="linkQuote" href="/r9k/res/484.html#q484">484</a>
+    <a class="linkReply" href="/r9k/res/484.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=484">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Never forget who died for us.</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="485"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-484-485">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">06/14/2021 (Mon) 20:31:34</span>
+  
+  <a class="linkPreview" href="/r9k/preview/485.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/484.html#485">No.</a><a class="linkQuote" href="/r9k/res/484.html#q485">485</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+    <span class="panelBacklinks"> </span> 
+  </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">-BIZ SHILL GROUP: <a rel="nofollow" target="_blank" href="https://twitter.com/joesodjfsdfzz/status/1399488362730475528">https://twitter.com/joesodjfsdfzz/status/1399488362730475528</a></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="482"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-482">
+    
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">04/20/2021 (Tue) 06:50:57</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/482.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/482.html#482">No.</a>
+    <a class="linkQuote" href="/r9k/res/482.html#q482">482</a>
+    <a class="linkReply" href="/r9k/res/482.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=482">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">hey</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"></div>
+</div><div data-boarduri="spoon" class="opCell" id="1383"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1383">
+    <span class="labelSubject">ask this dude</span>
+    <a class="linkName noEmailName">silver</a>
+    
+    
+    <span class="labelCreated">04/19/2021 (Mon) 15:25:22</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1383.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1383.html#1383">No.</a>
+    <a class="linkQuote" href="/spoon/res/1383.html#q1383">1383</a>
+    <a class="linkReply" href="/spoon/res/1383.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1383">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Ask this dude about everything his name is jessie Fedeliza gedion</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"></div>
+</div><div data-boarduri="spoon" class="opCell" id="1382"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1382">
+    <span class="labelSubject">ask this dude</span>
+    <a class="linkName noEmailName">silver</a>
+    
+    
+    <span class="labelCreated">04/19/2021 (Mon) 15:24:18</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1382.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1382.html#1382">No.</a>
+    <a class="linkQuote" href="/spoon/res/1382.html#q1382">1382</a>
+    <a class="linkReply" href="/spoon/res/1382.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1382">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Ask this dude about everything his name is jessie Fedeliza gedion</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"></div>
+</div><div data-boarduri="spoon" class="opCell" id="1374"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1374">
+    <span class="labelSubject">Porn!</span>
+    <a class="linkName noEmailName">Anonymous</a>
+    
+    
+    <span class="labelCreated">08/30/2020 (Sun) 01:58:02</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1374.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1374.html#1374">No.</a>
+    <a class="linkQuote" href="/spoon/res/1374.html#q1374">1374</a>
+    <a class="linkReply" href="/spoon/res/1374.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1374">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">What are the best porn sites on .onion? You always hear about these celeb nude rings and what not, but even basic level porn seems to be hard to find on here</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="spoon" id="1375"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1374-1375">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-ca" src="/.static/flags/ca.png" title="Canada">
+  
+  <span class="labelCreated">08/30/2020 (Sun) 02:49:02</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1375.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1374.html#1375">No.</a><a class="linkQuote" href="/spoon/res/1374.html#q1375">1375</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><span class="greenText">&gt;porn</span><br><span class="greenText">&gt;onion</span><br>hiddenwiki should cover that. but as far as i recall there is only one thing worthwhile and its a defunct site called pinkmeth or something. Supposedly was a repsitory of camwhore nudes or someshit.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1379"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1374-1379">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+  <span class="labelRole">Board owner</span>
+  <span class="labelCreated">03/03/2021 (Wed) 18:26:25</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1379.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1374.html#1379">No.</a><a class="linkQuote" href="/spoon/res/1374.html#q1379">1379</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">lol at this guy</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1380"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1374-1380">
+  
+  <a class="linkName noEmailName">fatoldguy</a>
+  <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+  <span class="labelRole">Board owner</span>
+  <span class="labelCreated">03/03/2021 (Wed) 18:27:04</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1380.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1374.html#1380">No.</a><a class="linkQuote" href="/spoon/res/1374.html#q1380">1380</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">btw ill probs help exactly when i feel like it</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="480"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/2f1f1920d13320f0d31cc6cd05c267be-imagepng.png">Open File</a>(<span class="sizeLabel">243.33 KB</span>
+  <span class="dimensionLabel">680x709</span> <a class="originalNameLink" href="/.media/2f1f1920d13320f0d31cc6cd05c267be-imagepng.png" download="aaf.png">aaf.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/2f1f1920d13320f0d31cc6cd05c267be-imagepng.png" data-filewidth="680" data-fileheight="709" data-filemime="image/png"><img src="/.media/t_2f1f1920d13320f0d31cc6cd05c267be-imagepng"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-480">
+    
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">03/03/2021 (Wed) 05:05:18</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/480.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/480.html#480">No.</a>
+    <a class="linkQuote" href="/r9k/res/480.html#q480">480</a>
+    <a class="linkReply" href="/r9k/res/480.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=480">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">iscord.gg/FaKSAaKFhs<br>We are a genuine Christian server<br>We try to convert people to christianism, arguments are welcome, also this server is not for people who get mad easily</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="481"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-480-481">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">03/03/2021 (Wed) 05:13:31</span>
+  
+  <a class="linkPreview" href="/r9k/preview/481.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/480.html#481">No.</a><a class="linkQuote" href="/r9k/res/480.html#q481">481</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/2f1f1920d13320f0d31cc6cd05c267be-imagepng.png">Open File</a>(<span class="sizeLabel">243.33 KB</span>
+  <span class="dimensionLabel">680x709</span> <a class="originalNameLink" href="/.media/2f1f1920d13320f0d31cc6cd05c267be-imagepng.png" download="aaf.png">aaf.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/2f1f1920d13320f0d31cc6cd05c267be-imagepng.png" data-filewidth="680" data-fileheight="709" data-filemime="image/png"><img src="/.media/t_2f1f1920d13320f0d31cc6cd05c267be-imagepng"></a></figure></div>
+  <div class="divMessage">iscord.gg/FaKSAaKFhs<br>We are a genuine Christian server<br>We try to convert people to christianism, arguments are welcome, also this server is not for people who get mad easily</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell" id="478"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/72f97dc73089e5556d5d07abcd00ab6d-videomp4.mp4">Open File</a>(<span class="sizeLabel">6.62 MB</span>
+  <span class="dimensionLabel">320x240</span> <a class="originalNameLink" href="/.media/72f97dc73089e5556d5d07abcd00ab6d-videomp4.mp4" download="r9k_neet.mp4">r9k_neet.mp4</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/72f97dc73089e5556d5d07abcd00ab6d-videomp4.mp4" data-filewidth="320" data-fileheight="240" data-filemime="video/mp4"><img src="/.media/t_72f97dc73089e5556d5d07abcd00ab6d-videomp4"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-478">
+    
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">02/16/2021 (Tue) 18:48:43</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/478.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/478.html#478">No.</a>
+    <a class="linkQuote" href="/r9k/res/478.html#q478">478</a>
+    <a class="linkReply" href="/r9k/res/478.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=478">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Who knows what this guy's (nick)name was? He was some R9K NEET who killed himself (not the same guy who livestreamed it).</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="479"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-478-479">
+  
+  <a class="linkName" href="mailto:sage">Robot</a>
+  
+  
+  <span class="labelCreated">02/25/2021 (Thu) 00:30:25</span>
+  
+  <a class="linkPreview" href="/r9k/preview/479.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/478.html#479">No.</a><a class="linkQuote" href="/r9k/res/478.html#q479">479</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/478.html#478">&gt;&gt;478</a><br>It fills me with great sadness when people commit suicide.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="r9k" class="opCell multipleUploads" id="435"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/7c4b095b71c76279d1af0e73b86a0720-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">1002.55 KB</span>
+  <span class="dimensionLabel">1920x1080</span> <a class="originalNameLink" href="/.media/7c4b095b71c76279d1af0e73b86a0720-imagejpeg.jpg" download="1.jpg">1.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/7c4b095b71c76279d1af0e73b86a0720-imagejpeg.jpg" data-filewidth="1920" data-fileheight="1080" data-filemime="image/jpeg"><img src="/.media/t_7c4b095b71c76279d1af0e73b86a0720-imagejpeg" width="255" height="143"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/364a66c750a35e4913438402a039be12-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">402.87 KB</span>
+  <span class="dimensionLabel">1920x1080</span> <a class="originalNameLink" href="/.media/364a66c750a35e4913438402a039be12-imagejpeg.jpg" download="2.jpg">2.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/364a66c750a35e4913438402a039be12-imagejpeg.jpg" data-filewidth="1920" data-fileheight="1080" data-filemime="image/jpeg"><img src="/.media/t_364a66c750a35e4913438402a039be12-imagejpeg" width="255" height="143"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/d64d64416bc299174c75563852f16d0d-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">403.23 KB</span>
+  <span class="dimensionLabel">1920x1080</span> <a class="originalNameLink" href="/.media/d64d64416bc299174c75563852f16d0d-imagejpeg.jpg" download="3.jpg">3.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/d64d64416bc299174c75563852f16d0d-imagejpeg.jpg" data-filewidth="1920" data-fileheight="1080" data-filemime="image/jpeg"><img src="/.media/t_d64d64416bc299174c75563852f16d0d-imagejpeg" width="255" height="143"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/7a674bc58a1c91b6148080407b45bda4-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">925.91 KB</span>
+  <span class="dimensionLabel">900x1300</span> <a class="originalNameLink" href="/.media/7a674bc58a1c91b6148080407b45bda4-imagejpeg.jpg" download="7a674bc58a1c91b6148080407b45bda4.jpg">7a674bc58a1c91b6148080407b45bda4.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/7a674bc58a1c91b6148080407b45bda4-imagejpeg.jpg" data-filewidth="900" data-fileheight="1300" data-filemime="image/jpeg"><img src="/.media/t_7a674bc58a1c91b6148080407b45bda4-imagejpeg" width="177" height="255"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/acf6159e464213bcf565da1972dcd3c0-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">133.63 KB</span>
+  <span class="dimensionLabel">750x600</span> <a class="originalNameLink" href="/.media/acf6159e464213bcf565da1972dcd3c0-imagejpeg.jpg" download="acf6159e464213bcf565da1972dcd3c0.jpg">acf6159e464213bcf565da1972dcd3c0.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/acf6159e464213bcf565da1972dcd3c0-imagejpeg.jpg" data-filewidth="750" data-fileheight="600" data-filemime="image/jpeg"><img src="/.media/t_acf6159e464213bcf565da1972dcd3c0-imagejpeg" width="255" height="204"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="r9k-435">
+    <span class="labelSubject">Waifu thread</span>
+    <a class="linkName noEmailName">Robot</a>
+    
+    
+    <span class="labelCreated">07/15/2020 (Wed) 09:03:57</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/r9k/preview/435.html">[Preview]</a>
+    <a class="linkSelf" href="/r9k/res/435.html#435">No.</a>
+    <a class="linkQuote" href="/r9k/res/435.html#q435">435</a>
+    <a class="linkReply" href="/r9k/res/435.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=r9k&amp;t=435">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Post anything about your waifu or waifus in general. Questions, stuff you do for/with her, waifublogposting, OC about her, anything.<br>At the time I'm typing this people are scared Zchan might go down, the place we were last, so I hope all you bros made it here.</div>
+  
+  
+  
+  <div class="labelOmission">3 posts and 1 image omitted.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="r9k" id="446"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-435-446">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/17/2020 (Fri) 18:40:42</span>
+  
+  <a class="linkPreview" href="/r9k/preview/446.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/435.html#446">No.</a><a class="linkQuote" href="/r9k/res/435.html#q446">446</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/435.html#445">&gt;&gt;445</a><br>yeah, but to be honest im lurking on both sides of the spectrum, some nigger is spamming Lynx as of now, so do by all means post here</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="447"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-435-447">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/18/2020 (Sat) 02:07:39</span>
+  
+  <a class="linkPreview" href="/r9k/preview/447.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/435.html#447">No.</a><a class="linkQuote" href="/r9k/res/435.html#q447">447</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/7aad2c8192a85dfab435f1dbc11cb20b-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">94.16 KB</span>
+  <span class="dimensionLabel">600x838</span> <a class="originalNameLink" href="/.media/7aad2c8192a85dfab435f1dbc11cb20b-imagejpeg.jpg" download="abiggirl.jpg">abiggirl.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/7aad2c8192a85dfab435f1dbc11cb20b-imagejpeg.jpg" data-filewidth="600" data-fileheight="838" data-filemime="image/jpeg"><img src="/.media/t_7aad2c8192a85dfab435f1dbc11cb20b-imagejpeg" width="183" height="255"></a></figure></div>
+  <div class="divMessage">So, I assume this must be our home from now on since zchan is kaput?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="448"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-435-448">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">07/18/2020 (Sat) 04:25:00</span>
+  
+  <a class="linkPreview" href="/r9k/preview/448.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/435.html#448">No.</a><a class="linkQuote" href="/r9k/res/435.html#q448">448</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/435.html#447">&gt;&gt;447</a><br>One of. We can go back to Lynxchan as well so we have two boards to post in.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="464"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-435-464">
+  
+  <a class="linkName" href="mailto:sage">Robot</a>
+  
+  
+  <span class="labelCreated">08/01/2020 (Sat) 20:48:04</span>
+  
+  <a class="linkPreview" href="/r9k/preview/464.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/435.html#464">No.</a><a class="linkQuote" href="/r9k/res/435.html#q464">464</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/a9d8a011b544ead3c6fef7f0634f024e-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">40.15 KB</span>
+  <span class="dimensionLabel">518x553</span> <a class="originalNameLink" href="/.media/a9d8a011b544ead3c6fef7f0634f024e-imagejpeg.jpg" download="depressed_VB_drink.jpg">depressed_VB_drink.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/a9d8a011b544ead3c6fef7f0634f024e-imagejpeg.jpg" data-filewidth="518" data-fileheight="553" data-filemime="image/jpeg"><img src="/.media/t_a9d8a011b544ead3c6fef7f0634f024e-imagejpeg" width="239" height="255"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/435.html#435">&gt;&gt;435</a><br>I've seen /a/nons and /jp/sies elsewhere use "wife" instead on account of how loose "waifu" is used among the sheepies. I suggest the same be done here, so that we may recognize that he are different—above the plebs.<br>Aristocratic attitude breeds aristocracy. Something that 8gag had lost over the years.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="r9k" id="465"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="r9k-435-465">
+  
+  <a class="linkName noEmailName">Robot</a>
+  
+  
+  <span class="labelCreated">08/02/2020 (Sun) 03:31:22</span>
+  
+  <a class="linkPreview" href="/r9k/preview/465.html">[Preview]</a>
+  <a class="linkSelf" href="/r9k/res/435.html#465">No.</a><a class="linkQuote" href="/r9k/res/435.html#q465">465</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/r9k/res/435.html#464">&gt;&gt;464</a><br>More than fine by me. I always felt like the word itself sounds really stupid when you take it seriously. Wife just makes more sense.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="spoon" class="opCell" id="1365"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/deeac664d71b61cf5b7c984973b726a0-applicationpdf.pdf">Open File</a>(<span class="sizeLabel">3.28 MB</span>
+   <a class="originalNameLink" href="/.media/deeac664d71b61cf5b7c984973b726a0-applicationpdf.pdf" download="eleusis.pdf">eleusis.pdf</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/deeac664d71b61cf5b7c984973b726a0-applicationpdf.pdf" data-filemime="application/pdf"><img src="/genericThumb.png"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1365">
+    <span class="labelSubject">Eluesis</span>
+    <a class="linkName" href="mailto:Detroit@dnmx.org">Detroit</a>
+    
+    
+    <span class="labelCreated">01/27/2020 (Mon) 10:27:20</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1365.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1365.html#1365">No.</a>
+    <a class="linkQuote" href="/spoon/res/1365.html#q1365">1365</a>
+    <a class="linkReply" href="/spoon/res/1365.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1365">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Greatest book I have found online.</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="spoon" id="1366"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1365-1366">
+  <span class="labelSubject">Help me</span>
+  <a class="linkName noEmailName">...</a>
+  <img class="imgFlag flag-ar" src="/.static/flags/ar.png" title="Argentina">
+  
+  <span class="labelCreated">02/17/2020 (Mon) 08:25:06</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1366.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1365.html#1366">No.</a><a class="linkQuote" href="/spoon/res/1365.html#q1366">1366</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/9013cdb47b2ed33f9e9fb03f89ce03c3-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">64.50 KB</span>
+  <span class="dimensionLabel">1080x452</span> <a class="originalNameLink" href="/.media/9013cdb47b2ed33f9e9fb03f89ce03c3-imagejpeg.jpg" download="20200217_052157.jpg">20200217_052157.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/9013cdb47b2ed33f9e9fb03f89ce03c3-imagejpeg.jpg" data-filewidth="1080" data-fileheight="452" data-filemime="image/jpeg"><img src="/.media/t_9013cdb47b2ed33f9e9fb03f89ce03c3-imagejpeg" width="255" height="107"></a></figure></div>
+  <div class="divMessage">This girl is disrespectful. I need help</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1368"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1365-1368">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/13/2020 (Mon) 19:07:39</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1368.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1365.html#1368">No.</a><a class="linkQuote" href="/spoon/res/1365.html#q1368">1368</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">What is your instant answer for the question about your true faith?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="spoon" id="1369"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1365-1369">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">04/13/2020 (Mon) 19:21:41</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1369.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1365.html#1369">No.</a><a class="linkQuote" href="/spoon/res/1365.html#q1369">1369</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/spoon/res/1365.html#1368">&gt;&gt;1368</a><br><br>Its complicated 2 explain - its something careful, that exists, and I believe in it</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="spoon" class="opCell" id="1364"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/3413ac0d2143bdf7fa0c579a43d1c36a-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">23.28 KB</span>
+  <span class="dimensionLabel">257x367</span> <a class="originalNameLink" href="/.media/3413ac0d2143bdf7fa0c579a43d1c36a-imagejpeg.jpg" download="Cj.jpg">Cj.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/3413ac0d2143bdf7fa0c579a43d1c36a-imagejpeg.jpg" data-filewidth="257" data-fileheight="367" data-filemime="image/jpeg"><img src="/.media/t_3413ac0d2143bdf7fa0c579a43d1c36a-imagejpeg" width="179" height="255"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1364">
+    <span class="labelSubject">faggots</span>
+    <a class="linkName noEmailName">Anonymous</a>
+    <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+    
+    <span class="labelCreated">01/25/2020 (Sat) 21:54:29</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1364.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1364.html#1364">No.</a>
+    <a class="linkQuote" href="/spoon/res/1364.html#q1364">1364</a>
+    <a class="linkReply" href="/spoon/res/1364.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1364">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">is homosexuality a mental disease. I assume yes because most homosexuals I meet have a bad past like all molesty and shit from uncle cock holster. so I tried to do research and all I could find was "Perspectives" of doctors. but I want the black and white. yes or no. and if so why.</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="spoon" id="1367"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1364-1367">
+  
+  <a class="linkName noEmailName">Coconut===&gt;</a>
+  <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+  
+  <span class="labelCreated">02/27/2020 (Thu) 20:34:21</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1367.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1364.html#1367">No.</a><a class="linkQuote" href="/spoon/res/1364.html#q1367">1367</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/spoon/res/1364.html#1364">&gt;&gt;1364</a><br><a class="quoteLink" href="/spoon/res/362438.html#362438">&gt;&gt;362438</a><br>“A problem repeatedly occurred”, much like your lack of hand eye coordination.<br><span class="greenText">&gt;We have silver, we have space gray, I repeat: We have space gray. Sorry to our prospective money pits, we’ve run out of gold for Team N-Word_</span><br>Imagine I put this “ “ at the prompt so you can trick yourself that you’ve been playing along The Whole Way.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="spoon" class="opCell" id="1361"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="spoon-1361">
+    
+    <a class="linkName noEmailName">Anonymous</a>
+    <img class="imgFlag flag-se" src="/.static/flags/se.png" title="Sweden">
+    
+    <span class="labelCreated">11/09/2019 (Sat) 18:47:04</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/spoon/preview/1361.html">[Preview]</a>
+    <a class="linkSelf" href="/spoon/res/1361.html#1361">No.</a>
+    <a class="linkQuote" href="/spoon/res/1361.html#q1361">1361</a>
+    <a class="linkReply" href="/spoon/res/1361.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=spoon&amp;t=1361">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">How do you go about finding women who are into pedophilia or incest nowadays? Fanfiction and RP sites used to be a frigging goldmine, but it's much harder nowadays with the fanfic trend being blown over by other online media, and RPers being increasingly secluded and divided between many platforms, often hard to navigate.<br><br>Also both fanfic and RP communities have been hampered by increasingly restrictive sites, both anti-"illegal" and anti-sex overall, and many former writers/dedicated RPers have just went along with it or disappeared. For those few remaining souls who dare, there are few active havens left, especially now that 8chan is gone too.<br><br>I know women into these things are out there in larger numbers than it seems, but i come across them way too seldom nowadays, and the ones i do really aren't interested in a relationship, especially with someone living far away, so what's your secrets? Any tips?</div>
+  
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell multipleUploads" data-boarduri="spoon" id="1363"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="spoon-1361-1363">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  <img class="imgFlag flag-us" src="/.static/flags/us.png" title="United States of 'Murica">
+  
+  <span class="labelCreated">01/05/2020 (Sun) 03:08:48</span>
+  
+  <a class="linkPreview" href="/spoon/preview/1363.html">[Preview]</a>
+  <a class="linkSelf" href="/spoon/res/1361.html#1363">No.</a><a class="linkQuote" href="/spoon/res/1361.html#q1363">1363</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/f02adbf7448f245203e66b8ed15a5ccd-imagepng.png">Open File</a>(<span class="sizeLabel">163.35 KB</span>
+  <span class="dimensionLabel">500x642</span> <a class="originalNameLink" href="/.media/f02adbf7448f245203e66b8ed15a5ccd-imagepng.png" download="583e36e38f1d9f550d5629a6d5f7abab02b13b525be5e7339b45ba7026e7dc22.png">583e36e38f1d9f550d5629a6d5f7abab02b13b525be5e7339b45ba7026e7dc22.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/f02adbf7448f245203e66b8ed15a5ccd-imagepng.png" data-filewidth="500" data-fileheight="642" data-filemime="image/png"><img src="/.media/t_f02adbf7448f245203e66b8ed15a5ccd-imagepng" width="199" height="255"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/a03f1741d10a13064d2e1317a87c359d-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">7.32 KB</span>
+  <span class="dimensionLabel">225x225</span> <a class="originalNameLink" href="/.media/a03f1741d10a13064d2e1317a87c359d-imagejpeg.jpg" download="b16376504d671b05f629b6e4c5fc5d8f9d122146726d6563edfcd142eb183afd.jpeg">b16376504d671b05f629b6e4c5fc5d8f9d122146726d6563edfcd142eb183afd.jpeg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/a03f1741d10a13064d2e1317a87c359d-imagejpeg.jpg" data-filewidth="225" data-fileheight="225" data-filemime="image/jpeg"><img src="/.media/a03f1741d10a13064d2e1317a87c359d-imagejpeg.jpg"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/a040d010a49e2e2c062bab77528c5635-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">235.99 KB</span>
+  <span class="dimensionLabel">630x385</span> <a class="originalNameLink" href="/.media/a040d010a49e2e2c062bab77528c5635-imagejpeg.jpg" download="1545644167069.jpg">1545644167069.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/a040d010a49e2e2c062bab77528c5635-imagejpeg.jpg" data-filewidth="630" data-fileheight="385" data-filemime="image/jpeg"><img src="/.media/t_a040d010a49e2e2c062bab77528c5635-imagejpeg" width="255" height="156"></a></figure><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/5ba89436cf90c487939b24f0ba2d1bef-imagejpeg.jpg">Open File</a>(<span class="sizeLabel">366.74 KB</span>
+  <span class="dimensionLabel">2033x1490</span> <a class="originalNameLink" href="/.media/5ba89436cf90c487939b24f0ba2d1bef-imagejpeg.jpg" download="1573869224546.jpg">1573869224546.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/5ba89436cf90c487939b24f0ba2d1bef-imagejpeg.jpg" data-filewidth="2033" data-fileheight="1490" data-filemime="image/jpeg"><img src="/.media/t_5ba89436cf90c487939b24f0ba2d1bef-imagejpeg" width="255" height="187"></a></figure></div>
+  <div class="divMessage"></div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="hope" class="opCell" id="1"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/aa3a6bbcb4c89db3148ab6d2466234a3-imagepng">Open File</a>(<span class="sizeLabel">214.41 KB</span>
+  <span class="dimensionLabel">778x790</span> <a class="originalNameLink" href="/.media/aa3a6bbcb4c89db3148ab6d2466234a3-imagepng" download="1435525916829-2.png">1435525916829-2.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/aa3a6bbcb4c89db3148ab6d2466234a3-imagepng" data-filewidth="778" data-fileheight="790" data-filemime="image/png"><img src="/.media/t_aa3a6bbcb4c89db3148ab6d2466234a3-imagepng"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="hope-1">
+    <span class="labelSubject">Ask Your Questions Here</span>
+    <a class="linkName" href="mailto:nhfip@cock.li">Anonymous</a>
+    
+    <span class="labelRole">Board owner</span>
+    <span class="labelCreated">01/09/2016 (Sat) 09:04:14</span>
+    
+    
+    <span class="pinIndicator" title="Sticky"></span>
+    
+    
+    <a class="linkPreview" href="/hope/preview/1.html">[Preview]</a>
+    <a class="linkSelf" href="/hope/res/1.html#1">No.</a>
+    <a class="linkQuote" href="/hope/res/1.html#q1">1</a>
+    <a class="linkReply" href="/hope/res/1.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=hope&amp;t=1">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">This thread is your introduction to /hope/. Make sure to read the rules before posting. Any and all questions you may have will be answered here. In the meantime here is a short FAQ based on questions I received while on 8chan:<br><br>1. What is this board?<br><br>/hope/ is a very new board created on 8chan in October of 2015. It was born out of a thread on /christian/ in which an anon asked for ideas on how to help all of the miserable and unfortunate people "on imageboards in the whole world." /hope/ was one such idea, and was created that same day.<br><br>2. So what do you do here?<br><br>As the rules state, /hope/ is for helping your fellow anons. Imageboards contain a large segment of fairly miserable people - people who in times past would receive assistance from their families, friends, neighborhood associations, and churches. In these fallen times, however, we only have each other. Our motto is that whatever can be achieved to help anons over the internet, we will achieve. Of course, we kind of need a userbase to do that. So, our proximate goal is to create a culture of charitable anons.<br><br>3. What constitutes "help"?<br><br>For now? Advice, kind words, conversation, resource and information-sharing, and so on. We hope to eventually have a large and dedicated userbase that can organize things like building wikis, organizing social events, teaching workshops, and providing material and financial assistance to needy anons - or maybe just a Secret Santa-type deal on the holidays. What we can achieve is really only limited by what anons are willing to do for each other.<br><br>1/2</div>
+  
+  
+  
+  <div class="labelOmission">1 post omitted.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="hope" id="5"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-1-5">
+  
+  <a class="linkName noEmailName">odilitime</a>
+  
+  <span class="labelRole">Root</span>
+  <span class="labelCreated">02/08/2016 (Mon) 08:56:57</span>
+  
+  <a class="linkPreview" href="/hope/preview/5.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/1.html#5">No.</a>
+  <a class="linkQuote" href="/hope/res/1.html#q5">5</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/hope/res/1.html#2">&gt;&gt;2</a><br>Oh cool idea. Haven't heard of this.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="12"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-1-12">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">02/26/2016 (Fri) 18:04:08</span>
+  
+  <a class="linkPreview" href="/hope/preview/12.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/1.html#12">No.</a>
+  <a class="linkQuote" href="/hope/res/1.html#q12">12</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><span class="greenText">&gt; It was born out of a thread on /christian/</span><br><br>lol done.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="13"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-1-13">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">02/26/2016 (Fri) 19:00:55</span>
+  
+  <a class="linkPreview" href="/hope/preview/13.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/1.html#13">No.</a>
+  <a class="linkQuote" href="/hope/res/1.html#q13">13</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I actually think this is a good idea for once don't know if anything like this has been tried before tho.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="25"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-1-25">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">03/03/2016 (Thu) 11:27:46</span>
+  
+  <a class="linkPreview" href="/hope/preview/25.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/1.html#25">No.</a>
+  <a class="linkQuote" href="/hope/res/1.html#q25">25</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/0b52d0b5d2a0c2ca53d1abe6a491eecc-imagepng">Open File</a>(<span class="sizeLabel">67.55 KB</span>
+  <span class="dimensionLabel">1920x1080</span> <a class="originalNameLink" href="/.media/0b52d0b5d2a0c2ca53d1abe6a491eecc-imagepng" download="1435615916845-1.png">1435615916845-1.png</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/0b52d0b5d2a0c2ca53d1abe6a491eecc-imagepng" data-filewidth="1920" data-fileheight="1080" data-filemime="image/png"><img src="/.media/t_0b52d0b5d2a0c2ca53d1abe6a491eecc-imagepng"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/hope/res/1.html#1">&gt;&gt;1</a><br>Is the prospect of a "Secret Santa" type deal being put forward because more people are down during the Christmas period?</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="30"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-1-30">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">08/07/2019 (Wed) 22:53:30</span>
+  
+  <a class="linkPreview" href="/hope/preview/30.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/1.html#30">No.</a><a class="linkQuote" href="/hope/res/1.html#q30">30</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I like this a lot and will stick around as much as possible.<br><br>I think a board with a christian mission will actually end up being more "Christian" than a "Christian" board because instead of sitting round having a go at each other we'll actually have a focus. Which is why Jesus sent us out in the first place so we wouldn't just be tearing each other to shreds . Give our energy somewhere useful to go</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div><div data-boarduri="hope" class="opCell" id="14"><hr>
+<div class="innerOP">
+  <div class="panelUploads opUploadPanel"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/fbdae9767d1605b302a1030fe05e766d-imagejpeg">Open File</a>(<span class="sizeLabel">58.62 KB</span>
+  <span class="dimensionLabel">500x375</span> <a class="originalNameLink" href="/.media/fbdae9767d1605b302a1030fe05e766d-imagejpeg" download="tumblr_nrpjgtPU6e1te6l94o1_500.jpg">tumblr_nrpjgtPU6e1te6l94o1_500.jpg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/fbdae9767d1605b302a1030fe05e766d-imagejpeg" data-filewidth="500" data-fileheight="375" data-filemime="image/jpeg"><img src="/.media/t_fbdae9767d1605b302a1030fe05e766d-imagejpeg"></a></figure></div>
+  <div class="opHead">
+    <input type="checkbox" class="deletionCheckBox" name="hope-14">
+    <span class="labelSubject">Suicide / Addiction</span>
+    <a class="linkName noEmailName">Anonymous</a>
+    
+    
+    <span class="labelCreated">02/27/2016 (Sat) 09:38:53</span>
+    
+    
+    
+    
+    
+    <a class="linkPreview" href="/hope/preview/14.html">[Preview]</a>
+    <a class="linkSelf" href="/hope/res/14.html#14">No.</a>
+    <a class="linkQuote" href="/hope/res/14.html#q14">14</a>
+    <a class="linkReply" href="/hope/res/14.html">[Reply]</a>
+    <a class="linkLast50" href="/.static/last50.html?b=hope&amp;t=14">[Last 50 Posts]</a>
+    
+    <span class="panelBacklinks"></span>
+  </div>
+  <div>
+    
+  </div>
+  <div class="divMessage">Just went to a funeral of a family friend that was an addict and hung himself in his garage. He was in late 20s and it was rough hearing all his friend and how he had touched all their lives but to himself, he felt worthless. It's very easy to trick yourself into thinking you're the worst person alive, that's why it's important to ask for help, talk to people. A lot of have been there too but recovered. His last words was "freedom from fear".<br><br>His mom posted this chainletter shit but I think it has a good message:<br><span class="greenText">&gt;Many people think that a suicide attempt is a selfish move because the person just does not care about the people left behind. I can tell you that when a person gets to that point, they truly believe that their loved ones will be much better off with them gone.This is mental illness not selfishness. TRUTH: Depression is a terrible disease and seems relentless. A lot of us have been close to that edge, or dealt with family members in a crisis, and some have lost friends and loved ones. Let's look out for each other and stop sweeping mental illness under the rug. Give a moment of support to all those who have family problems, health struggles, job issues, worries of any kind and just need to know that someone cares. Do it for all of us, for nobody is immune. Thank you!</span><br><br>If you're having problems with depression: First see doctor, there could be a chemical imbalance that can only be treated by medicine. Any and all health professionals will help and take it seriously if you tell them you sometimes have trouble with depression.<br><br>Failing that here are a little of some small things you can try on your own to help get in a better position.<br><a target="blank" href="http://www.littlethings.com/natural-ways-to-treat-depression/">http://www.littlethings.com/natural-ways-to-treat-depression/</a><br><br>If you're having problems with drugs or alcohol check out your local AA or NA. There are more people out there with the same problem going through similar things. And I got to hang out with a lot of them after the funeral and they're awesome people.</div>
+  
+  
+  
+  <div class="labelOmission">2 posts and 1 image omitted.</div>
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<div class="divPosts"><div class="postCell" data-boarduri="hope" id="19"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-14-19">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">02/27/2016 (Sat) 16:25:21</span>
+  
+  <a class="linkPreview" href="/hope/preview/19.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/14.html#19">No.</a>
+  <a class="linkQuote" href="/hope/res/14.html#q19">19</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"><figure class="uploadCell"><div class="uploadDetails">
+  <a class="nameLink" target="blank" style="display: none" href="/.media/834924820567ba8a00db90fd95a21582-imagejpeg">Open File</a>(<span class="sizeLabel">167.80 KB</span>
+  <span class="dimensionLabel">780x646</span> <a class="originalNameLink" href="/.media/834924820567ba8a00db90fd95a21582-imagejpeg" download="holohaveaniceday.jpeg">holohaveaniceday.jpeg</a>)
+</div>
+
+<a class="imgLink" target="_blank" href="/.media/834924820567ba8a00db90fd95a21582-imagejpeg" data-filewidth="780" data-fileheight="646" data-filemime="image/jpeg"><img src="/.media/t_834924820567ba8a00db90fd95a21582-imagejpeg"></a></figure></div>
+  <div class="divMessage"><a class="quoteLink" href="/hope/res/14.html#14">&gt;&gt;14</a><br><br>Thank you for taking the time to post this on our board, anon.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="21"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-14-21">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">02/27/2016 (Sat) 19:58:55</span>
+  
+  <a class="linkPreview" href="/hope/preview/21.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/14.html#21">No.</a>
+  <a class="linkQuote" href="/hope/res/14.html#q21">21</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I know that feel.<br>I feel like a worthless piece of shit 24/7, yet I am somewhat aware that I influence lives.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="26"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-14-26">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/09/2016 (Mon) 23:04:20</span>
+  
+  <a class="linkPreview" href="/hope/preview/26.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/14.html#26">No.</a>
+  <a class="linkQuote" href="/hope/res/14.html#q26">26</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage">I wouldn't trust the medicines industry. Apparently the drugs just make you apathetic. Some connections to violent tendencies because of them have been made as well.
+<br>
+<br>This might sound lame but I'd suggest taking a long break from work and cutting back on expenses for a while as a better way to treat depression, maybe change your environment for the time being as well. If you have no interests in anything, get some (or just look around various fields or topics.)
+<br>
+<br>I should note however that I have no experience with drugs. Last paragraph in OP sounds like good advice.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="27"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-14-27">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">05/09/2016 (Mon) 23:09:37</span>
+  
+  <a class="linkPreview" href="/hope/preview/27.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/14.html#27">No.</a>
+  <a class="linkQuote" href="/hope/res/14.html#q27">27</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/hope/res/14.html#26">&gt;&gt;26</a>
+<br><a target="blank" href="https://www.sciencedaily.com/releases/2012/04/120424120450.htm">https://www.sciencedaily.com/releases/2012/04/120424120450.htm</a>
+<br><a target="blank" href="http://www.clinical-depression.co.uk/dlp/treating-depression/side-effects-of-antidepressants/">http://www.clinical-depression.co.uk/dlp/treating-depression/side-effects-of-antidepressants/</a>
+<br><a target="blank" href="https://www.sciencedaily.com/releases/2014/02/140225122429.htm">https://www.sciencedaily.com/releases/2014/02/140225122429.htm</a>
+<br>
+<br>No archive, sorry.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div><div class="postCell" data-boarduri="hope" id="29"><!-- start post.html -->
+<div class="innerPost">
+  <input type="checkbox" class="deletionCheckBox" name="hope-14-29">
+  
+  <a class="linkName noEmailName">Anonymous</a>
+  
+  
+  <span class="labelCreated">08/07/2019 (Wed) 01:11:34</span>
+  
+  <a class="linkPreview" href="/hope/preview/29.html">[Preview]</a>
+  <a class="linkSelf" href="/hope/res/14.html#29">No.</a><a class="linkQuote" href="/hope/res/14.html#q29">29</a>
+  <a class="delLink" href="#bottom" onclick="delPost(this)">del</a>
+  
+  <span class="panelBacklinks"></span>
+  <div>
+  <span class="panelBacklinks"> </span> 
+ </div>
+  <div class="panelUploads"></div>
+  <div class="divMessage"><a class="quoteLink" href="/hope/res/14.html#26">&gt;&gt;26</a><br><a class="quoteLink" href="/hope/res/14.html#27">&gt;&gt;27</a><br><br>Enough people in my life have had positive experiences with anti-depressants to the point where I can't discount them completely.  At the same time, I completely agree that they should be a last resort, and/or for people with severe legitimate brain chemical issues, and should not be passed out like candy on Halloween.</div>
+  
+  
+  
+</div>
+<br class="textBrowserBreaks">
+<br class="textBrowserBreaks">
+<!-- end post.html -->
+</div></div>
+</div></div>
+  </div>
+  <script>scanPage();</script>
+
+
+
+</body></html>

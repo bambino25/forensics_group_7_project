@@ -8,6 +8,8 @@ from src.downloader import Downloader
 from src.parser import Parser
 from src.scheduler import Scheduler
 
+from config import DEFAULT_DIR, THREAD_DIR as target_path
+
 def flatten_distinct(nested_list):
     def flatten(lst):
         for item in lst:
@@ -49,11 +51,11 @@ if __name__ == '__main__':
 
         Using Breadth-First Search Strategy
     '''
-    seed = "https://zeitwohnen.it"
+    seed = "http://enxx3byspwsdo446jujc52ucy2pf5urdbhqw3kbsfhlfjwmbpj5smdad.onion/"
     queue = [seed] # FiFo
     visited_urls = set()
 
-    data_dir = Path('../data')
+    data_dir = DEFAULT_DIR
     depth_layer = 0
     max_workers = 5
     max_depth = 2

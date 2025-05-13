@@ -1,12 +1,5 @@
-# app.py
 import streamlit as st
-from pathlib import Path
-import os, time
 import pandas as pd
-from datetime import datetime, timedelta, timezone
-import pytz
-import logging
-import altair as alt
 from config import DATA_DIR, MODE, ENTITIES
 
 def main():
@@ -44,7 +37,9 @@ def main():
 
     st.markdown(
         """
-        In this page entities can be combined interactable. Most data was collected between 29.08.2019 and 02.03.2020
+        This page allows for interactive exploration and combination of entities. 
+        The majority of the data spans the period from 29-08-2019 to 02-03-2020.
+        Nearly 60,000 posts were analyzed.
         """
     )
 

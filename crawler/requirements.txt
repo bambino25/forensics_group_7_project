@@ -2,3 +2,4 @@ ua-generator
 beautifulsoup4
 requests
 urllib3
+requests[socks]
