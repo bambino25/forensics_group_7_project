@@ -1,2 +1,5 @@
 streamlit
 pathlib
+ast
+pandas
+numpy
