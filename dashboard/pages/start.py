@@ -37,19 +37,21 @@ def main():
         page_icon="👋",
     )
     st.title("Dark Web Analysis")
-    st.subheader("Leopold Paris, Steven")
+    st.subheader("Leopold Paris, Steven Verbeek")
     st.button("Update Data", on_click=preprocess_data)
-    st.write("_What are the most frequently mentioned weapons, military equipment, gun types, and related entities discussed on dark web forums?_")
     
     st.markdown(
         """
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
-        Cras venenatis euismod malesuada. Sed convallis, nunc et bibendum facilisis, nisi erat
-        venenatis enim, at tincidunt erat nunc nec ligula. Donec ut sapien non lectus fringilla
-        tincidunt. Aenean ac ligula euismod, facilisis nunc in, fringilla nisi. Sed nec
-        consectetur ligula. In hac habitasse platea dictumst. Donec ut felis non enim
+        This dashboard displays the results of the Assignment in Data Forensics. We analyzed the 8chan forum on the Dark Web. Trying to filter out the posts that are related to weapons, military equipment, and gun types. 
+        We used Gemma3 Model to identify posts related to weapons, military equipment, and gun types and GLiNER to extract entity types.
+        \n
+        We tried to answer following researchquestion:
         """
     )
+    
+    st.write("_What are the most frequently mentioned weapons, military equipment, gun types, and related entities discussed on dark web forums?_")
+    
+    
 
     st.header("KPI Metrics")
     def load_kpi_data():
@@ -106,7 +108,6 @@ def main():
     topic_df, war_related_df = load_shares_data()
     
     st.subheader("Shares per topic")
-    st.write(topic_df)
     chart = alt.Chart(topic_df).mark_arc().encode(
         theta=alt.Theta(field="count", type="quantitative"),
         color=alt.Color(field="topic", type="nominal"),

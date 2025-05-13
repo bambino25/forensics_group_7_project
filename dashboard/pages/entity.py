@@ -40,15 +40,11 @@ def main():
         selected_entities[entity] = st.sidebar.multiselect(entity, key_set)
 
     st.title("Entity Analysis")
-    st.subheader("Leopold Paris, Steven") 
+    #st.subheader("Leopold Paris, Steven") 
 
     st.markdown(
         """
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
-        Cras venenatis euismod malesuada. Sed convallis, nunc et bibendum facilisis, nisi erat
-        venenatis enim, at tincidunt erat nunc nec ligula. Donec ut sapien non lectus fringilla
-        tincidunt. Aenean ac ligula euismod, facilisis nunc in, fringilla nisi. Sed nec
-        consectetur ligula. In hac habitasse platea dictumst. Donec ut felis non enim
+        In this page entities can be combined interactable. Most data was collected between 29.08.2019 and 02.03.2020
         """
     )
 
