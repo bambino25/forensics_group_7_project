@@ -2,7 +2,7 @@ Code can be modified in the files _crawler/config.py_, _scraper/config.py_ and _
 Sample data gets provided. The full data is 10GB.
 
 ## Crawler
-### Requires
+### Requirements
 - Access to the dark web
 
 ### Run via:
@@ -18,7 +18,7 @@ python3 app.py
 ```
 
 ## Scraper
-### Requires
+### Requirements
 - Installation of ./scraper/requirements.txt
 - Crawled data inside the threads folder
 - Ollama running with Gemma3 4B Model downloaded
@@ -27,15 +27,19 @@ python3 app.py
 - Using python
 ```bash
 pip3 install -r requirements.txt 
-python3 app.py
+python3 -m spacy download en_core_web_sm
+python3 _1scrape.py
+python3 _2classify_war_related.py
+python3 _3ner.py
 ```
 
 ## Dashboard
-### Requires
+### Requirements
 - Installation of ./dashboard/requirements.txt
 
 ### Run via:
 - Using python
 ```bash
+pip3 install -r requirements.txt 
 streamlit run app.py
 ```
