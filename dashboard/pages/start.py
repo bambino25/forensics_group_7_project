@@ -108,7 +108,7 @@ def main():
     chart = alt.Chart(topic_df).mark_arc().encode(
         theta=alt.Theta(field="count", type="quantitative"),
         color=alt.Color(field="topic", type="nominal"),
-        tooltip=["Board", "count"]
+        tooltip=["topic", "count"]
     )
     st.altair_chart(chart, use_container_width=True)
 
