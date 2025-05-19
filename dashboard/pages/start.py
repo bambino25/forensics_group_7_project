@@ -104,11 +104,11 @@ def main():
         return dist_topic, dist_war_related
     topic_df, war_related_df = load_shares_data()
     
-    st.subheader("Shares per topic")
+    st.subheader("Shares per Board")
     chart = alt.Chart(topic_df).mark_arc().encode(
         theta=alt.Theta(field="count", type="quantitative"),
         color=alt.Color(field="topic", type="nominal"),
-        tooltip=["topic", "count"]
+        tooltip=["Board", "count"]
     )
     st.altair_chart(chart, use_container_width=True)
 
